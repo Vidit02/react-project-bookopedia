@@ -20,7 +20,7 @@ export const HomePage = () => {
         <div>
 
             <AllCss />
-            <NavigationBar/>
+            <NavigationBar />
             <section class="mt-0 overflow-hidden ">
                 <section class="vh-75 vh-lg-60 container-fluid rounded overflow-hidden">
                     <div class="swiper-container overflow-hidden rounded h-100 bg-light" data-swiper data-options='{
@@ -50,7 +50,7 @@ export const HomePage = () => {
                                 <div class="w-100 h-100 overflow-hidden position-absolute z-index-1 top-0 start-0 end-0 bottom-0" style={{ transitionDuration: "1000ms" }}>
                                     <Transform3d translate={translateSlider}>
                                         <div class="w-100 h-100 bg-img-cover bg-pos-center-center overflow-hidden" data-swiper-parallax="-100"
-                                            style={{ backgroundImage: "url(./assets/images/banners/banner-1.jpg)", transitionDuration: "1000ms" }}>
+                                            style={{ backgroundImage: "url(./assets/images/banners/booksbanner.jpeg)", transitionDuration: "1000ms" }}>
                                         </div>
                                     </Transform3d>
                                 </div>
@@ -58,7 +58,7 @@ export const HomePage = () => {
                                     class="container position-relative z-index-10 d-flex h-100 align-items-start flex-column justify-content-center" style={{ transitionDuration: "1000ms" }}>
                                     <p class="title-small text-white opacity-75 mb-0" data-swiper-parallax="-100">Everything You Need</p>
                                     <h2 class="display-3 tracking-wide fw-bold text-uppercase tracking-wide text-white" data-swiper-parallax="100">
-                                        <span class="text-outline-light">Summer</span> Essentials</h2>
+                                        <span class="text-light">Summer</span> Essentials</h2>
                                     <div data-swiper-parallax-y="-25">
                                         <Link to="/category" class="btn btn-psuedo text-white" role="button">Shop New Arrivals</Link>
                                     </div>
@@ -138,63 +138,49 @@ export const HomePage = () => {
                                     <div class="mx-3 mx-lg-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-1.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Berkley.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-3 mx-lg-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-2.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Jaico.jpeg" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-3 mx-lg-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-3.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Harpercol.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-3 mx-lg-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-4.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Hyperion.jpeg" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-3 mx-lg-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-5.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/WalkerBook.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-3 mx-lg-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-6.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/PenguinPubl.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
-                                    <div class="mx-3 mx-lg-5 f-w-24">
+                                    <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-7.svg" alt="" />
-                                            </picture>
-                                        </Link>
-                                    </div>
-                                    <div class="mx-3 mx-lg-5 f-w-24">
-                                        <Link class="d-block" to="/category">
-                                            <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-8.svg" alt="" />
-                                            </picture>
-                                        </Link>
-                                    </div>
-                                    <div class="mx-3 mx-lg-5 f-w-24">
-                                        <Link class="d-block" to="/category">
-                                            <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-9.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/TorBook.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
@@ -203,63 +189,49 @@ export const HomePage = () => {
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-1.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Berkley.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-2.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Jaico.jpeg" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-3.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Harpercol.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-4.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/Hyperion.jpeg" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-5.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/WalkerBook.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-6.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/PenguinPubl.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
                                     <div class="mx-5 f-w-24">
                                         <Link class="d-block" to="/category">
                                             <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-7.svg" alt="" />
-                                            </picture>
-                                        </Link>
-                                    </div>
-                                    <div class="mx-5 f-w-24">
-                                        <Link class="d-block" to="/category">
-                                            <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-8.svg" alt="" />
-                                            </picture>
-                                        </Link>
-                                    </div>
-                                    <div class="mx-5 f-w-24">
-                                        <Link class="d-block" to="/category">
-                                            <picture>
-                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/logo-9.svg" alt="" />
+                                                <img class="img-fluid d-table mx-auto" src="./assets/images/logos/TorBook.png" alt="" />
                                             </picture>
                                         </Link>
                                     </div>
@@ -269,115 +241,71 @@ export const HomePage = () => {
                     </div>
                 </div>
                 <div class="container-fluid">
+                    <div class="position-relative row my-lg-7 pt-5 pt-lg-0 g-8">
+                        <div class="bg-text bottom-0 start-0 end-0">
+                            <h2 class="bg-text-title opacity-10"><span class="text-outline-dark">Old</span>Skool</h2>
+                        </div>
+                        <div class="col-12 col-md-6 position-relative z-index-20 mb-7 mb-lg-0">
+                            <p class="text-muted title-small">Welcome</p>
+                            <h3 class="display-3 fw-bold mb-5"><span class="text-outline-dark">OldSkool</span> - streetwear & footwear specialists</h3>
+                            <p class="lead">We are OldSkool, a leading supplier of global streetwear brands, including names such as <Link to="/category">Stussy</Link>, <Link to="/category">Carhartt</Link>, <Link to="/category">Gramicci</Link>, <Link to="/category">Afends</Link> and many more.</p>
+                            <p class="lead">With worldwide shipping and unbeatable prices - now's a great time to pick out something from our range.</p>
+                            <Link to="/category" class="btn btn-psuedo" role="button">Shop New Arrivals</Link>
+                        </div>
+                        <div class="col-12 col-md-6 position-relative z-index-20 pe-0" >
+                            <picture class="w-50 d-block position-relative z-index-10 border border-white border-4 shadow-lg">
+                                <img class="img-fluid" src="./assets/images/banners/banner-5.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                            </picture>
+                            <picture class="w-60 d-block me-8 mt-n10 shadow-lg border border-white border-4 position-relative z-index-20 ms-auto">
+                                <img class="img-fluid" src="./assets/images/banners/banner-6.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                            </picture>
+                            <picture class="w-50 d-block me-8 mt-n7 shadow-lg border border-white border-4 position-absolute top-0 end-0 z-index-0 ">
+                                <img class="img-fluid" src="./assets/images/banners/banner-7.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                            </picture>
+                        </div>
+                    </div>
                     <div class="m-0">
                         <div class="swiper-container overflow-hidden overflow-lg-visible"
                             data-swiper
-                            data-options='{
-                        "spaceBetween": 25,
-                        "slidesPerView": 1,
-                        "observer": true,
-                        "observeParents": true,
-                        "breakpoints": {     
-                          "540": {
-                            "slidesPerView": 1,
-                            "spaceBetween": 0
-                          },
-                          "770": {
-                            "slidesPerView": 2
-                          },
-                          "1024": {
-                            "slidesPerView": 3
-                          },
-                          "1200": {
-                            "slidesPerView": 4
-                          },
-                          "1500": {
-                            "slidesPerView": 5
-                          }
-                        },   
-                        "navigation": {
-                          "nextEl": ".swiper-next",
-                          "prevEl": ".swiper-prev"
-                        }
-                      }'>
+                        >
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
+                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "260.25px", marginRight: "65px" }}>
                                     <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one" style={{ clipPath: "url(#svg-slanted-one)" }}>
-                                            <img class="w-100" title="" src="./assets/images/categories/category-7.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                                        <picture class="d-block mb-4 img-clip-shape-one" style={{ transform: "skewX(10deg)" }}>
+                                            <img class="w-100" title="" src="./assets/images/categories/ThrillerCover.jpeg" alt="HTML Bootstrap Template by Pixel Rocket" />
                                         </picture>
                                         <p class="title-small mb-2 text-muted">Must Haves</p>
-                                        <h4 class="lead fw-bold">Premium Essentials</h4>
+                                        <h4 class="lead fw-bold">Thriller Novels</h4>
                                         <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
                                     </div>
                                 </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
+                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "260.25px", marginRight: "65px" }}>
                                     <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-2.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                                        <picture class="d-block mb-4 img-clip-shape-one" style={{ transform: "skewX(10deg)" }}>
+                                            <img class="w-100" title="" src="./assets/images/categories/Comedy.png" alt="HTML Bootstrap Template by Pixel Rocket" />
                                         </picture>
                                         <p class="title-small mb-2 text-muted">Curated Selection</p>
-                                        <h4 class="lead fw-bold">Our Favourites</h4>
+                                        <h4 class="lead fw-bold">Comedy Books</h4>
                                         <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
                                     </div>
                                 </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
+                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "260.25px", marginRight: "65px" }}>
                                     <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-3.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                                        <picture class="d-block mb-4 img-clip-shape-one" style={{ transform: "skewX(10deg)" }}>
+                                            <img class="w-100" title="" src="./assets/images/categories/StudyBooks.jpeg" alt="HTML Bootstrap Template by Pixel Rocket" />
                                         </picture>
                                         <p class="title-small mb-2 text-muted">Streetwear Basics</p>
-                                        <h4 class="lead fw-bold">T-Shirts &amp; Shirts</h4>
+                                        <h4 class="lead fw-bold">Study Related Books</h4>
                                         <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
                                     </div>
                                 </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
+                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "260.25px", marginRight: "65px" }}>
                                     <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-4.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
+                                        <picture class="d-block mb-4 img-clip-shape-one" style={{ transform: "skewX(10deg)" }}>
+                                            <img class="w-100" title="" src="./assets/images/categories/BookGeneral.jpeg" alt="HTML Bootstrap Template by Pixel Rocket" />
                                         </picture>
                                         <p class="title-small mb-2 text-muted">Waterproof &amp; Lightweight</p>
-                                        <h4 class="lead fw-bold">Jackets &amp; Coats</h4>
-                                        <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
-                                    <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-5.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
-                                        </picture>
-                                        <p class="title-small mb-2 text-muted">Keep Warm</p>
-                                        <h4 class="lead fw-bold">Hats &amp; Beanies</h4>
-                                        <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
-                                    <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-6.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
-                                        </picture>
-                                        <p class="title-small mb-2 text-muted">20% Off</p>
-                                        <h4 class="lead fw-bold">Summer Sale</h4>
-                                        <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
-                                    <div class="me-xl-n4 me-xxl-n5" >
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-1.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
-                                        </picture>
-                                        <p class="title-small mb-2 text-muted">Just Arrived</p>
-                                        <h4 class="lead fw-bold">Latest Kicks</h4>
-                                        <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide align-self-stretch bg-transparent h-auto" style={{ width: "306.25px", marginRight: "25px" }}>
-                                    <div class="me-xl-n4 me-xxl-n5">
-                                        <picture class="d-block mb-4 img-clip-shape-one">
-                                            <img class="w-100" title="" src="./assets/images/categories/category-8.jpg" alt="HTML Bootstrap Template by Pixel Rocket" />
-                                        </picture>
-                                        <p class="title-small mb-2 text-muted">Accessories</p>
-                                        <h4 class="lead fw-bold">Bags &amp; Rugsacks</h4>
+                                        <h4 class="lead fw-bold">Romantic Novels</h4>
                                         <Link to="/category" class="btn btn-psuedo align-self-start">Shop Now</Link>
                                     </div>
                                 </div>
@@ -417,7 +345,7 @@ export const HomePage = () => {
                                     <div class="py-6 px-5 px-lg-10 text-center w-100">
                                         <h2 class="display-1 mb-3 fw-bold text-white"><span class="text-outline-light">Flash</span> Sale</h2>
                                         <p class="fs-5 fw-light text-white d-none d-md-block">Our yearly flash sale is now on! Grab yourself a bargain from the world's leading streetwear brands.</p>
-                                        <Link  to="/category" class="btn btn-psuedo text-white" role="button">Shop All Sale Items</Link>
+                                        <Link to="/category" class="btn btn-psuedo text-white" role="button">Shop All Sale Items</Link>
                                     </div>
                                 </div>
                             </div>
@@ -588,7 +516,7 @@ export const HomePage = () => {
                     </div>
                 </div>
             </section>
-            <Footer/>
+            <Footer />
         </div>
     )
 }
