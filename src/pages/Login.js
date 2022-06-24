@@ -50,7 +50,7 @@ export const Login = ({ handleClose }) => {
                     />
                     
                     <Box sx={{alignItems:"center"}} >
-                        <Button type="submit" variant="outlined" color="success" sx={{m:3}} onClick={handleClose}>
+                        <Button type="submit" variant="outlined" color="success" sx={{m:3}} onClick={handleClose} href="/">
                             Signup
                         </Button>
                         <Button type="submit" variant="outlined" color="primary" sx={{m:3}} href="/signup">

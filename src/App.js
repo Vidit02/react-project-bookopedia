@@ -22,6 +22,7 @@ import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import { useState } from 'react';
 import { Sell } from './pages/Sell';
+import { Form } from './pages/Form';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Route path='/myaccount' element={<MyAccount/>}></Route>
           <Route path='/signup' element={<Signup/>}></Route>
           <Route path='/sell' element={<Sell/>}></Route>
+          <Route path='/see' element={<Form/>}></Route>
         </Routes>
     </div>
   );

@@ -49,7 +49,7 @@ export const NavigationBar = () => {
                                         Account
                                     </Link>
                                 </li> */}
-                                {/* <li class="ms-4 d-inline-block position-relative dropdown-cart">
+                                <li class="ms-4 d-inline-block position-relative dropdown-cart">
                                     <Badge badgeContent={4} color="primary">
                                         <ShoppingCart color="action" />
                                     </Badge>
@@ -64,8 +64,8 @@ export const NavigationBar = () => {
                                         <li><Link class="dropdown-item" to="/yourorder">Your Orders</Link></li>
                                         <li><Link class="dropdown-item" to="/category">Sign Out</Link></li>
                                     </ul>
-                                </li> */}
-                                <li class="ms-4 d-inline-block position-relative">
+                                </li>
+                                {/* <li class="ms-4 d-inline-block position-relative">
                                     <Button variant='outlined' href='/signup'  sx={{height:"2.8rem"}} >
                                         Create Account
                                     </Button>
@@ -75,7 +75,7 @@ export const NavigationBar = () => {
                                         Log in
                                     </Button>
                                     <ModelDialog open={open} handleClose={handleClose}/>
-                                </li>
+                                </li> */}
 
                             </ul>
 
@@ -208,7 +208,7 @@ export const NavigationBar = () => {
                                         </ul>
                                     </li>
                                     <li class="nav-item">
-                                        <Link class="nav-link" to="/category" role="button">
+                                        <Link class="nav-link" to="/sell" role="button">
                                             Sell
                                         </Link>
                                     </li>
