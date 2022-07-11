@@ -5,18 +5,19 @@ import { AllCss } from './AllCss'
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { fontSize } from '@mui/system';
 import TextField from '@mui/material/TextField';
-import { Badge, Button } from '@mui/material';
+import { Badge, Box, Button } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 import { ModelDialog } from './ModelDialog';
 
 export const NavigationBar = () => {
     const [open, setopen] = useState(false)
+    
 
-    const handleOpen = () =>{
+    const handleOpen = () => {
         setopen(true)
     }
 
-    const handleClose = () =>{
+    const handleClose = () => {
         setopen(false)
     }
     return (
@@ -50,9 +51,12 @@ export const NavigationBar = () => {
                                     </Link>
                                 </li> */}
                                 <li class="ms-4 d-inline-block position-relative dropdown-cart">
-                                    <Badge badgeContent={4} color="primary">
-                                        <ShoppingCart color="action" />
-                                    </Badge>
+                                    <Button
+                                    >
+                                        <Badge badgeContent={4} color="primary">
+                                            <ShoppingCart color="action" />
+                                        </Badge>
+                                    </Button>
                                 </li>
                                 <li class="nav-item dropdown" style={{ marginLeft: "1rem" }}>
                                     <Link class="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">

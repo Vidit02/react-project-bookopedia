@@ -41,7 +41,6 @@ export const Signup = () => {
                         </Typography>
                         {/* <Box component="form" sx={{mt:3}}> */}
                         <Box sx={{ mt: 3 }}>
-
                             <form onSubmit={formik.handleSubmit} >
                                 <Grid container spacing={2}>
                                     <Grid item xs={12} sm={6}>
