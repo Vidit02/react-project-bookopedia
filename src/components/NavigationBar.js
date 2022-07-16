@@ -50,15 +50,15 @@ export const NavigationBar = () => {
                                         Account
                                     </Link>
                                 </li> */}
-                                <li class="ms-4 d-inline-block position-relative dropdown-cart">
+                                {/* <li class="ms-4 d-inline-block position-relative dropdown-cart">
                                     <Button
                                     >
                                         <Badge badgeContent={4} color="primary">
                                             <ShoppingCart color="action" />
                                         </Badge>
                                     </Button>
-                                </li>
-                                <li class="nav-item dropdown" style={{ marginLeft: "1rem" }}>
+                                </li> */}
+                                {/* <li class="nav-item dropdown" style={{ marginLeft: "1rem" }}>
                                     <Link class="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <PersonOutlinedIcon fontSize='large' />
                                         Chandrash
@@ -68,18 +68,18 @@ export const NavigationBar = () => {
                                         <li><Link class="dropdown-item" to="/yourorder">Your Orders</Link></li>
                                         <li><Link class="dropdown-item" to="/category">Sign Out</Link></li>
                                     </ul>
-                                </li>
-                                {/* <li class="ms-4 d-inline-block position-relative">
+                                </li> */}
+                                <li class="ms-4 d-inline-block position-relative">
                                     <Button variant='outlined' href='/signup'  sx={{height:"2.8rem"}} >
                                         Create Account
                                     </Button>
                                 </li>
                                 <li class="ms-4 d-inline-block position-relative">
-                                    <Button variant='outlined' color='success' onClick={handleOpen} sx={{height:"2.8rem"}}>
+                                    <Button variant='outlined' color='success' href="/login" sx={{height:"2.8rem"}}>
                                         Log in
                                     </Button>
-                                    <ModelDialog open={open} handleClose={handleClose}/>
-                                </li> */}
+                                    {/* <ModelDialog open={open} handleClose={handleClose}/> */}
+                                </li>
 
                             </ul>
 

@@ -1,12 +1,18 @@
-import React from 'react'
-import { Alert, alertTitleClasses, Avatar, Box, Button, Checkbox, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
+import { Alert, alertTitleClasses, Avatar, Box, Button, Checkbox, CircularProgress, Container, FormControl, FormControlLabel, Grid, TextField, Typography } from '@mui/material'
 import { AllCss } from '../components/AllCss'
 import { Footer } from '../components/Footer'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { NavigationBar } from '../components/NavigationBar'
 import { Form, Formik, useFormik } from 'formik';
+import axios, { Axios } from 'axios';
 
 export const Signup = () => {
+    const [isLoading, setisLoading] = useState(false)
+    const [isSuccess, setisSuccess] = useState(false)
+    // const submitForm = (val) =>{
+    //     alert(JSON.stringify(val, null, 2))
+    // }
     const formik = useFormik({
         initialValues: {
             username: "",
@@ -17,7 +23,14 @@ export const Signup = () => {
             pincode: ""
         },
         onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2));
+            axios.post("http://localhost:9999/signup",JSON.stringify(values,null,2)),{
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            }.then(()=>{
+                console.log("success");
+            })
+            // alert())
         }
     })
     console.log(formik.values);
@@ -50,11 +63,11 @@ export const Signup = () => {
                                             id="username"
                                             label="User name"
                                             name="username"
-                                        value={formik.values.username}
-                                        onChange={formik.handleChange}
+                                            value={formik.values.username}
+                                            onChange={formik.handleChange}
                                         />
                                     </Grid>
-                            <Grid item xs={12} sm={6}>
+                                    <Grid item xs={12} sm={6}>
                                         <TextField
                                             required
                                             fullWidth
@@ -63,8 +76,8 @@ export const Signup = () => {
                                             name="phonenum"
                                             autoComplete="number"
                                             type="number"
-                                        value={formik.values.phonenum}
-                                        onChange={formik.handleChange}
+                                            value={formik.values.phonenum}
+                                            onChange={formik.handleChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -75,8 +88,8 @@ export const Signup = () => {
                                             label="Email Address"
                                             name="emailid"
                                             autoComplete="email"
-                                        value={formik.values.emailid}
-                                        onChange={formik.handleChange}
+                                            value={formik.values.emailid}
+                                            onChange={formik.handleChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -88,8 +101,8 @@ export const Signup = () => {
                                             type="password"
                                             id="password"
                                             autoComplete="new-password"
-                                        value={formik.values.password}
-                                        onChange={formik.handleChange}
+                                            value={formik.values.password}
+                                            onChange={formik.handleChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -101,8 +114,8 @@ export const Signup = () => {
                                             type="text"
                                             id="address"
                                             autoComplete="new-password"
-                                        value={formik.values.address}
-                                        onChange={formik.handleChange}
+                                            value={formik.values.address}
+                                            onChange={formik.handleChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -114,8 +127,8 @@ export const Signup = () => {
                                             name="pincode"
                                             autoComplete="pincode"
                                             type="number"
-                                        value={formik.values.pincode}
-                                        onChange={formik.handleChange}
+                                            value={formik.values.pincode}
+                                            onChange={formik.handleChange}
                                         />
                                     </Grid>
                                     <Grid item xs={12}>
@@ -123,11 +136,13 @@ export const Signup = () => {
                                             control={<Checkbox value="allowExtraEmails" color="primary" />}
                                             label="Remember Me"
                                         />
-                                    </Grid> 
-                            </Grid>
-                            <Button variant="contained" type="submit" onSubmit={formik.handleSubmit} color="primary" sx={{ m: 2, width: "50%" }} >
+                                    </Grid>
+                                </Grid>
+                                <Button variant="contained" type="submit" onSubmit={formik.handleSubmit} color="primary" sx={{ m: 2, width: "50%" }} >
                                     Signup
                                 </Button>
+                                <CircularProgress sx={{m:-2,marginLeft:1}}/>
+                                
                             </form>
                         </Box>
                     </Box>

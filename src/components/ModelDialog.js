@@ -5,7 +5,7 @@ import { Login } from '../pages/Login'
 export const ModelDialog = ({open,handleClose}) => {
   return (
     <Dialog open={open} onClose={handleClose}>
-        <Logwin handleClose={handleClose}/>
+        <Login handleClose={handleClose}/>
     </Dialog>
   )
 }
