@@ -7,7 +7,7 @@ import { NavigationBar } from '../components/NavigationBar'
 import { Formik, useFormik } from 'formik';
 import { LoginOutlined } from '@mui/icons-material';
 
-export const Login = () => {
+export const Login = (props) => {
     const formik = useFormik({
         initialValues: {
             emaildid: "",

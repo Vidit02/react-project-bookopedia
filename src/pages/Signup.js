@@ -6,8 +6,11 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { NavigationBar } from '../components/NavigationBar'
 import { Form, Formik, useFormik } from 'formik';
 import axios, { Axios } from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+ 
 
-export const Signup = () => {
+export const Signup = (props) => {
     const [isLoading, setisLoading] = useState(false)
     const [isSuccess, setisSuccess] = useState(false)
     // const submitForm = (val) =>{
@@ -23,22 +26,44 @@ export const Signup = () => {
             pincode: ""
         },
         onSubmit: (values) => {
-            axios.post("http://localhost:9999/signup",JSON.stringify(values,null,2)),{
-                headers:{
+            const json = JSON.stringify(values, null, 2)
+            axios.post("http://localhost:9999/signup", json, {
+                headers: {
                     'Content-Type': 'application/json'
                 }
-            }.then(()=>{
+            }).then((res) => {
                 console.log("success");
+                props.viewToast("some")
             })
             // alert())
         }
     })
+    toast.success('🦄 Wow so easy!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
     console.log(formik.values);
     return (
         <div>
             <div>
                 <AllCss />
                 <NavigationBar />
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
                 <Container component="main" maxWidth="xs" >
                     <Box sx={{
                         marginTop: 4,
@@ -141,8 +166,8 @@ export const Signup = () => {
                                 <Button variant="contained" type="submit" onSubmit={formik.handleSubmit} color="primary" sx={{ m: 2, width: "50%" }} >
                                     Signup
                                 </Button>
-                                <CircularProgress sx={{m:-2,marginLeft:1}}/>
-                                
+                                <CircularProgress sx={{ m: -2, marginLeft: 1 }} />
+
                             </form>
                         </Box>
                     </Box>
