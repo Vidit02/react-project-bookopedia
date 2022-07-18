@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, TextField, Typography } from '@mui/material'
+import { Avatar, Box, Button, Container, createTheme, TextField, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { AllCss } from '../components/AllCss'
 import { Footer } from '../components/Footer'
@@ -6,20 +6,52 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { NavigationBar } from '../components/NavigationBar'
 import { Formik, useFormik } from 'formik';
 import { LoginOutlined } from '@mui/icons-material';
+import * as Yup from 'yup';
+import axios, { Axios } from 'axios';
 
 export const Login = (props) => {
+    const theme = createTheme({
+        palette: {
+            dark: {
+                main: '#000000'
+            }
+        }
+    })
+    // const LoginSchema = Yup.object().shape({
+    //     emailid: Yup.string()
+    //         .email("Invalid Email ")
+    //         .required("Please Enter Email Id"),
+    //     password: Yup.string()
+    //         .min(8, "Password must be greater then 8 character")
+    //         .max(16, "Password must be less then 16 characters")
+    //         .required("Please Enter Password")
+    // })
+    const initialValues = {
+        emailid: "",
+        password: ""
+    }
     const formik = useFormik({
-        initialValues: {
-            emaildid: "",
-            password: ""
-        },
-        onSubmit: (values) => {
-            alert(JSON.stringify(values, null, 2))
+        initialValues : initialValues,
+        onSubmit: (values, { resetForm }) => {
+            const json = JSON.stringify(values,null,2)
+            axios.post("http://localhost:9999/login" , json , {
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            }).then((res) => {
+                if(res.status === 200) { 
+                    console.log(res);
+                    props.viewToast("success", `Welcome Back, ${res.data.username}`)
+                    resetForm({values:''})
+                }
+            }).catch(err=>{
+                props.viewToast("error","Invalid Email or Password")
+            })
         }
     })
     console.log(formik.values);
     return (
-        <div style={{backgroundColor:"#f2f5f6"}}>
+        <div style={{ backgroundColor: "#f2f5f6" }}>
             <AllCss />
             <NavigationBar />
             <section className="mt-0 overflow-hidden  vh-100 d-flex justify-content-center align-items-center p-4">
@@ -27,7 +59,7 @@ export const Login = (props) => {
                 {/* Login Form*/}
                 <div className="col col-md-8 col-lg-6 col-xxl-5">
                     {/* Logo*/}
-                    
+
                     {/* / Logo*/}
                     <div className="shadow-xl p-4 p-lg-5 bg-white">
                         <h1 className="text-center fw-bold mb-5 fs-2">Login</h1>
@@ -39,16 +71,20 @@ export const Login = (props) => {
                             <i className="ri-twitter-fill align-bottom" /> Login with Twitter
                         </a>
                         <span className="text-muted text-center d-block fw-bolder my-4">OR</span>
-                        <form>
-                            <div className="form-group" style={{textAlign:"left"}}>
+
+                        <form onSubmit={formik.handleSubmit}>
+                            <div className="form-group" style={{ textAlign: "left" }}>
                                 <label className="form-label" htmlFor="login-email" >
                                     Email address
                                 </label>
                                 <input
                                     type="email"
                                     className="form-control"
-                                    id="login-email"
+                                    id="emailid"
                                     placeholder="name@email.com"
+                                    name="emailid"
+                                    value={formik.values.emailid}
+                                    onChange={formik.handleChange}
                                 />
                             </div>
                             <div className="form-group">
@@ -64,13 +100,18 @@ export const Login = (props) => {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    id="login-password"
+                                    id="password"
                                     placeholder="Enter your password"
+                                    name="password"
+                                    value={formik.values.password}
+                                    onChange={formik.handleChange}
                                 />
                             </div>
-                            <button type="submit" className="btn btn-dark d-block w-100 my-4">
-                                Login
-                            </button>
+                            <ThemeProvider theme={theme}>
+                                <Button variant="contained" type="submit" onSubmit={formik.handleSubmit} color="dark" sx={{ marginBottom: 3, width: "100%" ,color: "white" , p:2 }} >
+                                    Signup
+                                </Button>
+                            </ThemeProvider>
                         </form>
                         <p className="d-block text-center text-muted">
                             New customer?{" "}
