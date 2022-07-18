@@ -24,6 +24,7 @@ import { useState } from 'react';
 import { Sell } from './pages/Sell';
 import { Form } from './pages/Form';
 import { Toaster } from './components/Toaster';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {

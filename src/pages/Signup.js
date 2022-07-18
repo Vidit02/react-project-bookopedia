@@ -33,20 +33,11 @@ export const Signup = (props) => {
                 }
             }).then((res) => {
                 console.log("success");
-                props.viewToast("some")
+                props.viewToast("error")
             })
             // alert())
         }
     })
-    toast.success('🦄 Wow so easy!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-    });
     console.log(formik.values);
     return (
         <div>
