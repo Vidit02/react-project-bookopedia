@@ -25,6 +25,7 @@ import { Sell } from './pages/Sell';
 import { Form } from './pages/Form';
 import { Toaster } from './components/Toaster';
 import 'react-toastify/dist/ReactToastify.css';
+import { ForgetPassword } from './pages/ForgetPassword';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
           <Route path='/sell' element={<Sell/>}></Route>
           <Route path='/see' element={<Form/>}></Route>
           <Route path='/login' element={<Login viewToast={viewToast}/>}></Route>
+          <Route path='/forgetpass' element={<ForgetPassword/>}></Route>
         </Routes>
     </div>
   );

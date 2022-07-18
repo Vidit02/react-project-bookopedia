@@ -93,7 +93,7 @@ export const Login = (props) => {
                                     className="form-label d-flex justify-content-between align-items-center"
                                 >
                                     Password
-                                    <a href="./forgotten-password.html" className="text-muted small">
+                                    <a href='/forgetpass'  className="text-muted small">
                                         Forgot your password?
                                     </a>
                                 </label>
