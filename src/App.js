@@ -29,12 +29,14 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [settoast, setsettoast] = useState(null)
-  const viewToast = (data) => {
+  const [msg, setmsg] = useState(null)
+  const viewToast = (data ,msg) => {
     setsettoast(data)
+    setmsg(msg)
   }
   return (
     <div className="App">
-        <Toaster mode={settoast}></Toaster>
+        <Toaster mode={settoast} msg={msg}></Toaster>
         <Routes>
           <Route path='/index' element={<HomePage/>}></Route>
           <Route path='/category' element={<Category/>}></Route>

@@ -8,9 +8,11 @@ import { Form, Formik, useFormik } from 'formik';
 import axios, { Axios } from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
  
 
 export const Signup = (props) => {
+    let navigate = useNavigate();
     const [isLoading, setisLoading] = useState(false)
     const [isSuccess, setisSuccess] = useState(false)
     // const submitForm = (val) =>{
@@ -25,15 +27,23 @@ export const Signup = (props) => {
             address: "",
             pincode: ""
         },
-        onSubmit: (values) => {
+        onSubmit: (values,{resetForm}) => {
             const json = JSON.stringify(values, null, 2)
             axios.post("http://localhost:9999/signup", json, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then((res) => {
-                console.log("success");
-                props.viewToast("error")
+                if(res.status === 200){
+                    props.viewToast("success",`Welcome, ${res.data.username}`)
+                    console.log(res);
+                    resetForm({values: ''})
+                    setTimeout(()=>{
+                        navigate("/login")
+                    },1000)
+                } else {
+                    props.viewToast("error")
+                }
             })
             // alert())
         }
@@ -157,8 +167,6 @@ export const Signup = (props) => {
                                 <Button variant="contained" type="submit" onSubmit={formik.handleSubmit} color="primary" sx={{ m: 2, width: "50%" }} >
                                     Signup
                                 </Button>
-                                <CircularProgress sx={{ m: -2, marginLeft: 1 }} />
-
                             </form>
                         </Box>
                     </Box>

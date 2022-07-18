@@ -6,9 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 export const Toaster = (props) => {
     switch (props.mode) {
         case "success":
-            props.mode !== null && toast.success('🦄 Wow so easy!', {
+            props.mode !== null && toast.success(`${props.msg}`, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 800,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -18,9 +18,9 @@ export const Toaster = (props) => {
             break;
 
         case "warning":
-            props.mode !== null && toast.warn('🦄 Wow so easy!', {
+            props.mode !== null && toast.warn(`${props.msg}`, {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 800,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -30,9 +30,9 @@ export const Toaster = (props) => {
             break;
 
             case "error" :
-                props.mode !== null && toast.error('🦄 Wow so easy!', {
+                props.mode !== null && toast.error(`${props.msg}`, {
                     position: "top-right",
-                    autoClose: 5000,
+                    autoClose: 800,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -43,30 +43,11 @@ export const Toaster = (props) => {
         default:
             break;
     }
-    console.log(props.mode);
-    // props.mode!==null&&toast.success('🦄 Wow so easy!', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    // });
-    // props.mode !== null && toast.success('🦄 Wow so easy!', {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     });
     return (
         props.mode !== null&&<div>
             <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={800}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick
