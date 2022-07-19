@@ -26,6 +26,7 @@ import { Form } from './pages/Form';
 import { Toaster } from './components/Toaster';
 import 'react-toastify/dist/ReactToastify.css';
 import { ForgetPassword } from './pages/ForgetPassword';
+import { OtpCheck } from './pages/OtpCheck';
 
 
 function App() {
@@ -58,7 +59,8 @@ function App() {
           <Route path='/sell' element={<Sell/>}></Route>
           <Route path='/see' element={<Form/>}></Route>
           <Route path='/login' element={<Login viewToast={viewToast}/>}></Route>
-          <Route path='/forgetpass' element={<ForgetPassword/>}></Route>
+          <Route path='/forgetpass' element={<ForgetPassword viewToast={viewToast}/>}></Route>
+          <Route path='/otpcheck' element={<OtpCheck viewToast={viewToast}/>}></Route>
         </Routes>
     </div>
   );

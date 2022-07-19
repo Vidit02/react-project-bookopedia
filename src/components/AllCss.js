@@ -15,6 +15,7 @@ export const AllCss = () => {
                 <link rel="stylesheet" href="./assets/css/theme.bundle.css" />
                 <script src="./assets/js/vendor.bundle.js"></script>
                 <script src="./assets/js/theme.bundle.js"></script>
+                <script src="./assets/js/opt"></script>
                 
             </Helmet>
         </div>

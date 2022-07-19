@@ -1,10 +1,34 @@
+import axios from 'axios'
+import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { AllCss } from '../components/AllCss'
 
-export const ForgetPassword = () => {
-    const [email, setemail] = useState(null)
+export const ForgetPassword = (props) => {
+    const [load, setload] = useState(false)
+    const initialValues = {
+        emailid: ""
+    }
+    const formik = useFormik({
+        initialValues: initialValues,
+        onSubmit: (values,{resetForm}) => {
+            const json = JSON.stringify(values, null, 2)
+            axios.post("http://localhost:9999/searchemail", json, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((res) => {
+                setload(true)
+                if (res.status === 200) {
+                    props.viewToast("info", "Otp Has been Sent")
+                    resetForm({values:""})
+                }
+            }).catch(err => {
+                props.viewToast("error", "Email Id not registered")
+            })
+        }
+    })
     return (
-        <div style={{backgroundColor:"#f2f5f6"}}>
+        <div style={{ backgroundColor: "#f2f5f6" }}>
             <AllCss />
             <section className="mt-0 overflow-hidden  vh-100 d-flex justify-content-center align-items-center p-4">
                 {/* Page Content Goes Here */}
@@ -35,7 +59,7 @@ export const ForgetPassword = () => {
                         <p className="text-muted">
                             Please enter your email below and we will send you an OTP to create new password.
                         </p>
-                        <form>
+                        <form onSubmit={formik.handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="forgot-password" className="form-label">
                                     Email address
@@ -43,8 +67,12 @@ export const ForgetPassword = () => {
                                 <input
                                     type="email"
                                     className="form-control"
-                                    id="forgot-password"
+                                    id="emailid"
+                                    name="emailid"
                                     placeholder="name@email.com"
+                                    value={formik.values.emailid}
+                                    onChange={formik.handleChange}
+                                // onChange={(e)=>setemail(e.target.value)}
                                 />
                             </div>
                             <button type="submit" className="btn btn-dark d-block w-100 my-4">
