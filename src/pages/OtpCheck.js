@@ -1,11 +1,22 @@
 import { Box, Button, Stack } from '@mui/material'
 import React, { useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { AllCss } from '../components/AllCss'
 
 export const OtpCheck = (props) => {
+    const [firstchar, setfirstchar] = useState('')
+    const [secondchar, setsecondchar] = useState('')
+    const [thirdchar, setthirdchar] = useState('')
+    const [fourthchar, setfourthchar] = useState('')
+    const [fifthchar, setfifthchar] = useState('')
+    const [sixthchar, setsixthchar] = useState('')
     return (
         <div style={{ backgroundColor: "#f2f5f6" }}>
             <AllCss />
+            <Helmet>
+                <script src="../lib/jquery/jquery.min.js"></script>
+                <script src="../js/otpjs.js"></script>
+            </Helmet>
             <section className="mt-0 overflow-hidden  vh-100 d-flex justify-content-center align-items-center p-4">
                 {/* Page Content Goes Here */}
                 {/* Login Form*/}
@@ -37,21 +48,21 @@ export const OtpCheck = (props) => {
                             OTP will be valid for 90 seconds only.
                         </p>
                         <div id="otp" class="inputs d-flex flex-row justify-content-center mt-2">
-                            <input class="m-2 text-center form-control rounded" type="text" id="first" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="second" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="third" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxlength="1" />
-                            <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxlength="1" />
+                            <input class="m-2 text-center form-control rounded" type="text" id="first" maxLength={1} onChange={(e) => { setfirstchar(e.target.value) }} />
+                            <input class="m-2 text-center form-control rounded" type="text" id="second" maxLength={1} onChange={(e) => { setsecondchar(e.target.value) }} />
+                            <input class="m-2 text-center form-control rounded" type="text" id="third" maxLength={1} onChange={(e) => { setthirdchar(e.target.value) }} />
+                            <input class="m-2 text-center form-control rounded" type="text" id="fourth" maxLength={1} onChange={(e) => { setfourthchar(e.target.value) }} />
+                            <input class="m-2 text-center form-control rounded" type="text" id="fifth" maxLength={1} onChange={(e) => { setfifthchar(e.target.value) }} />
+                            <input class="m-2 text-center form-control rounded" type="text" id="sixth" maxLength={1} onChange={(e) => { setsixthchar(e.target.value) }} />
                         </div>
-                        <Box sx={{alignContent:"center",width:"100%",marginLeft:"6rem",marginTop:"1rem"}}>
+                        <Box sx={{ alignContent: "center", width: "100%", marginLeft: "6rem", marginTop: "1rem" }}>
                             <Stack spacing={3} direction="row" >
-                                <Button variant='outlined' disabled sx={{p:1}}>Resend OTP</Button>
-                                <Button variant='contained' color='success' sx={{p:1}} >Verify OTP</Button>
+                                <Button variant='outlined' disabled sx={{ p: 1 }}>Resend OTP</Button>
+                                <Button variant='contained' color='success' sx={{ p: 1 }} >Verify OTP</Button>
                             </Stack>
                         </Box>
                     </div>
-                    
+
                 </div>
                 {/* / Login Form*/}
                 {/* /Page Content */}

@@ -1,6 +1,8 @@
+import { Box, CircularProgress, Typography } from '@mui/material'
 import axios from 'axios'
 import { useFormik } from 'formik'
 import React, { useState } from 'react'
+import { ScaleLoader } from 'react-spinners'
 import { AllCss } from '../components/AllCss'
 
 export const ForgetPassword = (props) => {
@@ -10,7 +12,7 @@ export const ForgetPassword = (props) => {
     }
     const formik = useFormik({
         initialValues: initialValues,
-        onSubmit: (values,{resetForm}) => {
+        onSubmit: (values, { resetForm }) => {
             const json = JSON.stringify(values, null, 2)
             axios.post("http://localhost:9999/searchemail", json, {
                 headers: {
@@ -20,7 +22,7 @@ export const ForgetPassword = (props) => {
                 setload(true)
                 if (res.status === 200) {
                     props.viewToast("info", "Otp Has been Sent")
-                    resetForm({values:""})
+                    resetForm({ values: "" })
                 }
             }).catch(err => {
                 props.viewToast("error", "Email Id not registered")
@@ -56,6 +58,16 @@ export const ForgetPassword = (props) => {
                     {/* / Logo*/}
                     <div className="shadow-xl p-4 p-lg-5 bg-white">
                         <h1 className="text-center fs-2 mb-5 fw-bold">Forgotten Password</h1>
+
+                        {/* <Box >
+                            <ScaleLoader
+                                height={40}
+                                loading
+                                width={5}
+                            />
+                            <Typography component="h1" variant='h6' sx={{marginTop:"1rem"}}>Loading...</Typography>
+                            <Typography component="h1" variant='h6'>Please Wait</Typography>
+                        </Box> */}
                         <p className="text-muted">
                             Please enter your email below and we will send you an OTP to create new password.
                         </p>
