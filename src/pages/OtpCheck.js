@@ -10,6 +10,8 @@ export const OtpCheck = (props) => {
     const [fourthchar, setfourthchar] = useState('')
     const [fifthchar, setfifthchar] = useState('')
     const [sixthchar, setsixthchar] = useState('')
+    const otp = firstchar + secondchar + thirdchar + fourthchar + fifthchar + sixthchar;
+    console.log("OTP is here" , otp)
     return (
         <div style={{ backgroundColor: "#f2f5f6" }}>
             <AllCss />

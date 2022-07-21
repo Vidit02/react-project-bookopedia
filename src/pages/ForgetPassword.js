@@ -4,25 +4,44 @@ import { useFormik } from 'formik'
 import React, { useState } from 'react'
 import { ScaleLoader } from 'react-spinners'
 import { AllCss } from '../components/AllCss'
+import {useNavigate} from 'react-router-dom'
 
 export const ForgetPassword = (props) => {
     const [load, setload] = useState(false)
     const initialValues = {
         emailid: ""
     }
+    let navigate = useNavigate();
     const formik = useFormik({
         initialValues: initialValues,
         onSubmit: (values, { resetForm }) => {
             const json = JSON.stringify(values, null, 2)
+            setload(true)
+            console.log("log5",load);
             axios.post("http://localhost:9999/searchemail", json, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then((res) => {
-                setload(true)
                 if (res.status === 200) {
-                    props.viewToast("info", "Otp Has been Sent")
+                    console.log("load   1 ", load);
                     resetForm({ values: "" })
+                    axios.post("http://localhost:9999/getotp",json,{
+                        headers: {
+                            'Content-Type' : 'application/json'
+                        }
+                    }).then((res) => {
+                        console.log("load 2" , load);
+                        if(res.status === 200) {
+                            console.log("load 4" , load);
+                            setload(false)
+                            props.viewToast("info" , "OTP has been generated")
+                            console.log("Data", res);
+                            navigate("/otpcheck")
+                        }
+                    }).catch(err => {
+                        props.viewToast("error", "Network Error")
+                    })
                 }
             }).catch(err => {
                 props.viewToast("error", "Email Id not registered")
@@ -58,39 +77,43 @@ export const ForgetPassword = (props) => {
                     {/* / Logo*/}
                     <div className="shadow-xl p-4 p-lg-5 bg-white">
                         <h1 className="text-center fs-2 mb-5 fw-bold">Forgotten Password</h1>
-
-                        {/* <Box >
-                            <ScaleLoader
-                                height={40}
-                                loading
-                                width={5}
-                            />
-                            <Typography component="h1" variant='h6' sx={{marginTop:"1rem"}}>Loading...</Typography>
-                            <Typography component="h1" variant='h6'>Please Wait</Typography>
-                        </Box> */}
-                        <p className="text-muted">
-                            Please enter your email below and we will send you an OTP to create new password.
-                        </p>
-                        <form onSubmit={formik.handleSubmit}>
-                            <div className="form-group">
-                                <label htmlFor="forgot-password" className="form-label">
-                                    Email address
-                                </label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    id="emailid"
-                                    name="emailid"
-                                    placeholder="name@email.com"
-                                    value={formik.values.emailid}
-                                    onChange={formik.handleChange}
-                                // onChange={(e)=>setemail(e.target.value)}
-                                />
-                            </div>
-                            <button type="submit" className="btn btn-dark d-block w-100 my-4">
-                                Send OTP
-                            </button>
-                        </form>
+                        {
+                            setload === true ?
+                                <Box >
+                                    <ScaleLoader
+                                        height={40}
+                                        loading
+                                        width={5}
+                                    />
+                                    <Typography component="h1" variant='h6' sx={{ marginTop: "1rem" }}>Loading...</Typography>
+                                    <Typography component="h1" variant='h6'>Please Wait</Typography>
+                                </Box> :
+                                <>
+                                    <p className="text-muted">
+                                        Please enter your email below and we will send you an OTP to create new password.
+                                    </p>
+                                    <form onSubmit={formik.handleSubmit}>
+                                        <div className="form-group">
+                                            <label htmlFor="forgot-password" className="form-label">
+                                                Email address
+                                            </label>
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                id="emailid"
+                                                name="emailid"
+                                                placeholder="name@email.com"
+                                                value={formik.values.emailid}
+                                                onChange={formik.handleChange}
+                                            // onChange={(e)=>setemail(e.target.value)}
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn btn-dark d-block w-100 my-4">
+                                            Send OTP
+                                        </button>
+                                    </form>
+                                </>
+                        }
                     </div>
                 </div>
                 {/* / Login Form*/}

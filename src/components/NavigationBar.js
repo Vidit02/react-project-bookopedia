@@ -13,13 +13,6 @@ export const NavigationBar = () => {
     const [open, setopen] = useState(false)
     
 
-    const handleOpen = () => {
-        setopen(true)
-    }
-
-    const handleClose = () => {
-        setopen(false)
-    }
     return (
         <div>
             <AllCss />
