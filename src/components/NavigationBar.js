@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import { AllCss } from './AllCss'
@@ -8,11 +8,58 @@ import TextField from '@mui/material/TextField';
 import { Badge, Box, Button } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 import { ModelDialog } from './ModelDialog';
+import axios from 'axios';
 
-export const NavigationBar = () => {
+export const NavigationBar = (props) => {
     const [open, setopen] = useState(false)
+    const [authtoken, setauthtoken] = useState(null)
+    const [userid, setuserid] = useState(null)
+    const [name, setname] = useState("")
+    if(sessionStorage.getItem("userid")!= null && sessionStorage.getItem("authtoken")!= null){
+        setopen(true)
+        setauthtoken(sessionStorage.getItem("authtoken"))
+        setuserid(sessionStorage.getItem("userid"))
+        const data = {
+            authtoken : authtoken,
+            userid : userid
+        }
+        axios.post("http://localhost:9999/private/user",data,{
+            headers: {
+                'Content-Type' : 'application/json',
+                'authToken' : authtoken,
+                'userid' : userid
+            }
+        }).then((res)=>{
+            setname(res.data.username)
+            setopen(true)
+        }).catch(err=>{
+            console.log("Error 404");
+            setopen(false)
+        })
+    }
+    // const data = {
+    //     authtoken : authtoken,
+    //     userid    : userid
+    // }
+    // useEffect(() => {
+        // setauthtoken(sessionStorage.getItem("userid"))
+        // setuserid(sessionStorage.getItem("authtoken"))
+        // setopen(false)
+        // authtoken != null && userid != null && axios.post("http://localhost:9999/private/user",data,{
+        //     headers: {
+        //         'Content-Type' : 'application/json',
+        //         'authToken' : authtoken,
+        //         'userid' : userid
+        //     }
+        // }).then((res)=>{
+        //     setname(res.data.username)
+        //     setopen(true)
+        // }).catch(err=>{
+        //     console.log("Error 404");
+        //     setopen(false)
+        // })
+    // }, [authtoken,userid])
     
-
     return (
         <div>
             <AllCss />

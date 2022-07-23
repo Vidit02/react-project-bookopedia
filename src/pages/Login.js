@@ -8,6 +8,7 @@ import { Formik, useFormik } from 'formik';
 import { LoginOutlined } from '@mui/icons-material';
 import * as Yup from 'yup';
 import axios, { Axios } from 'axios';
+import { useNavigate } from 'react-router-dom'
 
 export const Login = (props) => {
     const theme = createTheme({
@@ -17,6 +18,7 @@ export const Login = (props) => {
             }
         }
     })
+    const navigate = useNavigate();
     // const LoginSchema = Yup.object().shape({
     //     emailid: Yup.string()
     //         .email("Invalid Email ")
@@ -43,6 +45,9 @@ export const Login = (props) => {
                     console.log(res);
                     props.viewToast("success", `Welcome Back, ${res.data.username}`)
                     resetForm({values:''})
+                    sessionStorage.setItem('userid' , res.data.userid)
+                    sessionStorage.setItem('authtoken' , res.data.authtoken)
+                    navigate("/")
                 }
             }).catch(err=>{
                 props.viewToast("error","Invalid Email or Password")

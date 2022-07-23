@@ -41,6 +41,7 @@ function App() {
         <Toaster mode={settoast} msg={msg}></Toaster>
         <Routes>
           <Route path='/index' element={<HomePage/>}></Route>
+          <Route path='/' element={<HomePage/>}></Route>
           <Route path='/category' element={<Category/>}></Route>
           <Route path='/product' element={<Product/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>

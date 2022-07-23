@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { ScaleLoader } from 'react-spinners'
 import { AllCss } from '../components/AllCss'
 import {useNavigate} from 'react-router-dom'
+import Cookies from 'universal-cookie'
 
 export const ForgetPassword = (props) => {
     const [load, setload] = useState(false)
@@ -37,6 +38,10 @@ export const ForgetPassword = (props) => {
                             setload(false)
                             props.viewToast("info" , "OTP has been generated")
                             console.log("Data", res);
+                            const cookie = new Cookies();
+                            var date = new Date()
+                            date.setTime(date.getTime() + (90*1000))
+                            cookie.set('otpforforgetpass',res.data,{path: '/' , expires : date })
                             navigate("/otpcheck")
                         }
                     }).catch(err => {
@@ -78,7 +83,7 @@ export const ForgetPassword = (props) => {
                     <div className="shadow-xl p-4 p-lg-5 bg-white">
                         <h1 className="text-center fs-2 mb-5 fw-bold">Forgotten Password</h1>
                         {
-                            setload === true ?
+                            load === true ?
                                 <Box >
                                     <ScaleLoader
                                         height={40}

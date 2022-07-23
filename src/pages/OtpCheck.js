@@ -1,7 +1,10 @@
+import { Cookie, CookieTwoTone } from '@mui/icons-material'
 import { Box, Button, Stack } from '@mui/material'
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { AllCss } from '../components/AllCss'
+import Cookies from 'universal-cookie'
+import { useNavigate } from 'react-router-dom'
 
 export const OtpCheck = (props) => {
     const [firstchar, setfirstchar] = useState('')
@@ -11,7 +14,24 @@ export const OtpCheck = (props) => {
     const [fifthchar, setfifthchar] = useState('')
     const [sixthchar, setsixthchar] = useState('')
     const otp = firstchar + secondchar + thirdchar + fourthchar + fifthchar + sixthchar;
-    console.log("OTP is here" , otp)
+    const cookie = new Cookies()
+    var otpcookie = cookie.get("otpforforgetpass");
+    let navigate = useNavigate();
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log("Otp entered is :: " , otpcookie);
+        if(otpcookie === otp){
+            console.log("OTP entered correctly");
+            props.viewToast("success" , "Otp Verified Successfully")
+            navigate("/login")
+        } else {
+            console.log("OTP incorrect");
+            props.viewToast("error" , "Otp is incorrect")
+            navigate("/otpcheck")
+        }
+    }
+    console.log("Otp :: ", cookie.get("otpforforgetpass"));
+
     return (
         <div style={{ backgroundColor: "#f2f5f6" }}>
             <AllCss />
@@ -60,7 +80,7 @@ export const OtpCheck = (props) => {
                         <Box sx={{ alignContent: "center", width: "100%", marginLeft: "6rem", marginTop: "1rem" }}>
                             <Stack spacing={3} direction="row" >
                                 <Button variant='outlined' disabled sx={{ p: 1 }}>Resend OTP</Button>
-                                <Button variant='contained' color='success' sx={{ p: 1 }} >Verify OTP</Button>
+                                <Button variant='contained' color='success' sx={{ p: 1 }} onClick={handleSubmit}>Verify OTP</Button>
                             </Stack>
                         </Box>
                     </div>
