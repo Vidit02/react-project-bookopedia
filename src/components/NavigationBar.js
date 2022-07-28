@@ -15,15 +15,37 @@ export const NavigationBar = (props) => {
     const [authtoken, setauthtoken] = useState(null)
     const [userid, setuserid] = useState(null)
     const [name, setname] = useState("")
-    if(sessionStorage.getItem("userid")!= null && sessionStorage.getItem("authtoken")!= null){
-        setopen(true)
-        setauthtoken(sessionStorage.getItem("authtoken"))
-        setuserid(sessionStorage.getItem("userid"))
-        const data = {
-            authtoken : authtoken,
-            userid : userid
-        }
-        axios.post("http://localhost:9999/private/user",data,{
+    // if(sessionStorage.getItem("userid")!= null && sessionStorage.getItem("authtoken")!= null){
+    //     setopen(true)
+    //     setauthtoken(sessionStorage.getItem("authtoken"))
+    //     setuserid(sessionStorage.getItem("userid"))
+    //     const data = {
+    //         authtoken : authtoken,
+    //         userid : userid
+    //     }
+    //     axios.post("http://localhost:9999/private/user",data,{
+    //         headers: {
+    //             'Content-Type' : 'application/json',
+    //             'authToken' : authtoken,
+    //             'userid' : userid
+    //         }
+    //     }).then((res)=>{
+    //         setname(res.data.username)
+    //         setopen(true)
+    //     }).catch(err=>{
+    //         console.log("Error 404");
+    //         setopen(false)
+    //     })
+    // }
+    const data = {
+        authtoken : authtoken,
+        userid    : userid
+    }
+    useEffect(() => {
+        setauthtoken(sessionStorage.getItem("userid"))
+        setuserid(sessionStorage.getItem("authtoken"))
+        setopen(false)
+        authtoken != undefined && userid != undefined && axios.post("http://localhost:9999/private/user",data,{
             headers: {
                 'Content-Type' : 'application/json',
                 'authToken' : authtoken,
@@ -31,34 +53,13 @@ export const NavigationBar = (props) => {
             }
         }).then((res)=>{
             setname(res.data.username)
+            console.log("username " , res.data.username);
             setopen(true)
         }).catch(err=>{
             console.log("Error 404");
             setopen(false)
         })
-    }
-    // const data = {
-    //     authtoken : authtoken,
-    //     userid    : userid
-    // }
-    // useEffect(() => {
-        // setauthtoken(sessionStorage.getItem("userid"))
-        // setuserid(sessionStorage.getItem("authtoken"))
-        // setopen(false)
-        // authtoken != null && userid != null && axios.post("http://localhost:9999/private/user",data,{
-        //     headers: {
-        //         'Content-Type' : 'application/json',
-        //         'authToken' : authtoken,
-        //         'userid' : userid
-        //     }
-        // }).then((res)=>{
-        //     setname(res.data.username)
-        //     setopen(true)
-        // }).catch(err=>{
-        //     console.log("Error 404");
-        //     setopen(false)
-        // })
-    // }, [authtoken,userid])
+    }, [authtoken,userid])
     
     return (
         <div>
