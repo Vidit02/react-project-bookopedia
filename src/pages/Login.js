@@ -45,8 +45,15 @@ export const Login = (props) => {
                     console.log(res);
                     props.viewToast("success", `Welcome Back, ${res.data.username}`)
                     resetForm({values:''})
-                    sessionStorage.setItem('userid' , res.data.userid)
-                    sessionStorage.setItem('authtoken' , res.data.authtoken)
+                    const userjson = {
+                        name : res.data.username,
+                        email : res.data.email,
+                        authtoken : res.data.authtoken,
+                        userid : res.data.userid
+                    }
+                    sessionStorage.setItem("userdata" , JSON.stringify(userjson))
+                    // props.loggedin(true)
+                    // props.seedata()
                     navigate("/")
                 }
             }).catch(err=>{
@@ -54,7 +61,6 @@ export const Login = (props) => {
             })
         }
     })
-    console.log(formik.values);
     return (
         <div style={{ backgroundColor: "#f2f5f6" }}>
             <AllCss />

@@ -4,7 +4,8 @@ import { AllCss } from '../components/AllCss'
 import { Footer } from '../components/Footer'
 import { NavigationBar } from '../components/NavigationBar'
 
-export const Category = () => {
+export const Category = (props) => {
+    // props.seedata()
     return (
         <div>
             <AllCss />

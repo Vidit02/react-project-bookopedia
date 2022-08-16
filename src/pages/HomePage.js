@@ -5,7 +5,7 @@ import { AllCss } from '../components/AllCss'
 import { Footer } from '../components/Footer';
 import { NavigationBar } from '../components/NavigationBar';
 
-export const HomePage = () => {
+export const HomePage = (props) => {
     const translateSlider = {
         x: 0,
         y: 0,
@@ -16,9 +16,11 @@ export const HomePage = () => {
         left: 0,
         width: "100%"
     }
+    // props.seedata()
+    // props.viewToast("success","this")
+    // props.seedata()
     return (
         <div>
-
             <AllCss />
             <NavigationBar />
             <section class="mt-0 overflow-hidden ">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AllCss } from './AllCss'
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 import { fontSize } from '@mui/system';
@@ -11,10 +11,34 @@ import { ModelDialog } from './ModelDialog';
 import axios from 'axios';
 
 export const NavigationBar = (props) => {
-    const [open, setopen] = useState(false)
+    const [datafill, setdatafill] = useState(false)
     const [authtoken, setauthtoken] = useState(null)
     const [userid, setuserid] = useState(null)
-    const [name, setname] = useState("")
+    const navigate = useNavigate();
+    const [name, setname] = useState(null)
+    const [email, setemail] = useState(null)
+
+
+    useEffect(() => {
+      if(sessionStorage.getItem("userdata")!== null){
+        // console.log();e
+        setname(JSON.parse(sessionStorage.getItem("userdata")).name)
+      }
+    })
+    
+    // if (!datafill) {
+    //     if (sessionStorage.getItem("userdata") != null) {
+    //         setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+    //         setname(JSON.parse(sessionStorage.getItem("userdata")).name)
+    //         setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+    //         setdatafill(true)
+    //         // props.loggedin(true);
+    //     }
+    // } else {
+    //     console.log("data found");
+    // }
+    // console.log(props.seedata());
+    // console.log("data", authtoken, "  ", name, " ", userid);
     // if(sessionStorage.getItem("userid")!= null && sessionStorage.getItem("authtoken")!= null){
     //     setopen(true)
     //     setauthtoken(sessionStorage.getItem("authtoken"))
@@ -37,30 +61,63 @@ export const NavigationBar = (props) => {
     //         setopen(false)
     //     })
     // }
-    const data = {
-        authtoken : authtoken,
-        userid    : userid
-    }
-    useEffect(() => {
-        setauthtoken(sessionStorage.getItem("userid"))
-        setuserid(sessionStorage.getItem("authtoken"))
-        setopen(false)
-        authtoken != undefined && userid != undefined && axios.post("http://localhost:9999/private/user",data,{
-            headers: {
-                'Content-Type' : 'application/json',
-                'authToken' : authtoken,
-                'userid' : userid
-            }
-        }).then((res)=>{
-            setname(res.data.username)
-            console.log("username " , res.data.username);
-            setopen(true)
-        }).catch(err=>{
-            console.log("Error 404");
-            setopen(false)
-        })
-    }, [authtoken,userid])
-    
+    // useEffect(() => {
+    //     setauthtoken(sessionStorage.getItem("userid"))
+    //     setuserid(sessionStorage.getItem("authtoken"))
+    //     setopen(false)
+    //     authtoken != undefined && userid != undefined && axios.post("http://localhost:9999/private/user",data,{
+    //         headers: {
+    //             'Content-Type' : 'application/json',
+    //             'authToken' : authtoken,
+    //             'userid' : userid
+    //         }
+    //     }).then((res)=>{
+    //         setname(res.data.username)
+    //         console.log("username " , res.data.username);
+    //         setopen(true)
+    //     }).catch(err=>{
+    //         console.log("Error 404");
+    //         setopen(false)
+    //     })
+    // }, [authtoken,userid])
+    // if(sessionStorage.getItem("authtoken")!= null && sessionStorage.getItem("userid")!=null) {
+    //     setauthtoken(sessionStorage.getItem("authtoken"))
+    //     setuserid(sessionStorage.getItem("userid"))
+    // }
+    // if (authtoken == null && userid == null) {
+    //     console.log("data not present");
+    // } else {
+    //     axios.get("http://localhost:9999/getuserdata", {
+    //         headers: {
+    //             'authToken': authtoken,
+    //             'userid': userid
+    //         }
+    //     }).then((e) => {
+    //         console.log(e.data)
+    //         setauthtoken(null)
+    //         setuserid(null)
+    //         setname(e.data.data.username)
+    //     }).catch((err) => {
+    //         navigate("/error")
+    //     })
+    // }
+    // if(authtoken == null && userid == null) {
+    //     setauthtoken(sessionStorage.getItem("authtoken"))
+    //     setuserid(sessionStorage.getItem("userid"))
+    //     useEffect(() => {
+    //         axios.get("http://localhost:9999/getuserdata",{
+    //             headers : {
+    //                 'authToken' : authtoken,
+    //                 'userid' : userid
+    //             }
+    //         }).then((e)=>{
+    //             console.log(e.data)
+    //         }).catch((err)=>{
+    //             navigate("/error")
+    //         })
+    //     }, [authtoken,userid])
+    // }
+
     return (
         <div>
             <AllCss />
@@ -91,14 +148,40 @@ export const NavigationBar = (props) => {
                                         Account
                                     </Link>
                                 </li> */}
-                                {/* <li class="ms-4 d-inline-block position-relative dropdown-cart">
+                                <li class="ms-4 d-inline-block position-relative dropdown-cart">
                                     <Button
                                     >
                                         <Badge badgeContent={4} color="primary">
                                             <ShoppingCart color="action" />
                                         </Badge>
                                     </Button>
-                                </li> */}
+                                </li>
+                                {
+                                    name != null ?
+                                        <li class="nav-item dropdown" style={{ marginLeft: "1rem" }}>
+                                            <Link class="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <PersonOutlinedIcon fontSize='large' />
+                                                {name}
+                                            </Link>
+                                            <ul class="dropdown-menu">
+                                                <li><Link class="dropdown-item" to="/myaccount">Your Account</Link></li>
+                                                <li><Link class="dropdown-item" to="/yourorder">Your Orders</Link></li>
+                                                <li><Link class="dropdown-item" to="/category">Sign Out</Link></li>
+                                            </ul>
+                                        </li> :
+                                        <>
+                                            <li class="ms-4 d-inline-block position-relative">
+                                                <Button variant='outlined' href='/signup' sx={{ height: "2.8rem" }} >
+                                                    Create Account
+                                                </Button>
+                                            </li>
+                                            <li class="ms-4 d-inline-block position-relative">
+                                                <Button variant='outlined' color='success' href="/login" sx={{ height: "2.8rem" }}>
+                                                    Log in
+                                                </Button>
+                                            </li>
+                                        </>
+                                }
                                 {/* <li class="nav-item dropdown" style={{ marginLeft: "1rem" }}>
                                     <Link class="nav-link dropdown-toggle" to="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <PersonOutlinedIcon fontSize='large' />
@@ -110,17 +193,16 @@ export const NavigationBar = (props) => {
                                         <li><Link class="dropdown-item" to="/category">Sign Out</Link></li>
                                     </ul>
                                 </li> */}
-                                <li class="ms-4 d-inline-block position-relative">
-                                    <Button variant='outlined' href='/signup'  sx={{height:"2.8rem"}} >
+                                {/* <li class="ms-4 d-inline-block position-relative">
+                                    <Button variant='outlined' href='/signup' sx={{ height: "2.8rem" }} >
                                         Create Account
                                     </Button>
                                 </li>
                                 <li class="ms-4 d-inline-block position-relative">
-                                    <Button variant='outlined' color='success' href="/login" sx={{height:"2.8rem"}}>
+                                    <Button variant='outlined' color='success' href="/login" sx={{ height: "2.8rem" }}>
                                         Log in
                                     </Button>
-                                    {/* <ModelDialog open={open} handleClose={handleClose}/> */}
-                                </li>
+                                </li> */}
 
                             </ul>
 

@@ -27,28 +27,40 @@ import { Toaster } from './components/Toaster';
 import 'react-toastify/dist/ReactToastify.css';
 import { ForgetPassword } from './pages/ForgetPassword';
 import { OtpCheck } from './pages/OtpCheck';
+import { ErrorPage } from './pages/ErrorPage';
+import { Logout } from './pages/Logout';
 
 
 function App() {
   const [settoast, setsettoast] = useState(null)
   const [msg, setmsg] = useState(null)
+  const [datafill, setdatafill] = useState(false)
   const viewToast = (data ,msg) => {
     setsettoast(data)
     setmsg(msg)
   }
+
+  // const loggedin = (data) => {
+  //   setdatafill(data)
+  //   console.log(datafill);
+  // }
+
+  // const getdatafill = () =>{
+  //   return datafill;
+  // }
   return (
     <div className="App">
         <Toaster mode={settoast} msg={msg}></Toaster>
         <Routes>
           <Route path='/index' element={<HomePage/>}></Route>
           <Route path='/' element={<HomePage/>}></Route>
-          <Route path='/category' element={<Category/>}></Route>
+          <Route path='/category' element={<Category viewToast={viewToast} />}></Route>
           <Route path='/product' element={<Product/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>
           <Route path='/checkoutshipping' element={<CheckoutShipping/>}></Route>
           <Route path='/checkoutpayment' element={<CheckoutPayment/>}></Route>
-          <Route path='/' element={<HomePage/>}></Route>
+          <Route path='/' element={<HomePage />}></Route>
           <Route path='/dashboard' element={<Dashboard/>}></Route>
           <Route path='/profile' element={<Profile/>}></Route>
           <Route path='/dashhome' element={<DashHome/>}></Route>
@@ -61,7 +73,9 @@ function App() {
           <Route path='/see' element={<Form/>}></Route>
           <Route path='/login' element={<Login viewToast={viewToast}/>}></Route>
           <Route path='/forgetpass' element={<ForgetPassword viewToast={viewToast}/>}></Route>
-          <Route path='/otpcheck' element={<OtpCheck viewToast={viewToast}/>}></Route>
+          <Route path='/otpcheck' element={<OtpCheck viewToast={viewToast}/>} ></Route>
+          <Route path='/error' element={<ErrorPage/>}></Route>
+          <Route path='/logout' element={<Logout viewToast={viewToast} />}></Route>
         </Routes>
     </div>
   );
