@@ -15,7 +15,6 @@ export const Logout = () => {
     <div>
       <AllCss />
       <NavigationBar />
-
       <Footer />
     </div>
   )

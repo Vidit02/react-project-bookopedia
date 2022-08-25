@@ -9,7 +9,7 @@ import axios, { Axios } from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
- 
+
 
 export const Signup = (props) => {
     let navigate = useNavigate();
@@ -27,23 +27,34 @@ export const Signup = (props) => {
             address: "",
             pincode: ""
         },
-        onSubmit: (values,{resetForm}) => {
-            const json = JSON.stringify(values, null, 2)
-            axios.post("http://localhost:9999/signup", json, {
+        onSubmit: (values, { resetForm }) => {
+            axios.post("http://localhost:9999/emailcheck", {"emailid" : values.emailid}, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then((res) => {
-                if(res.status === 200){
-                    props.viewToast("success",`Welcome, ${res.data.username}`)
-                    console.log(res);
-                    resetForm({values: ''})
-                    setTimeout(()=>{
-                        navigate("/login")
-                    },1000)
-                } else {
-                    props.viewToast("error")
+                if (res.status === 200) {
+                    const json = JSON.stringify(values, null, 2)
+                    axios.post("http://localhost:9999/signup", json, {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then((res) => {
+                        if (res.status === 200) {
+                            props.viewToast("success", `Welcome, ${res.data.username}`)
+                            console.log(res);
+                            resetForm({ values: '' })
+                            setTimeout(() => {
+                                navigate("/login")
+                            }, 1000)
+                        } else {
+                            props.viewToast("error")
+                        }
+                    })
                 }
+            }).catch(err=>{
+                // props.viewToast("error","Invalid Email or Password")
+                console.log("Here is error =>", err);
             })
             // alert())
         }

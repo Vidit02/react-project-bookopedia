@@ -166,7 +166,7 @@ export const NavigationBar = (props) => {
                                             <ul class="dropdown-menu">
                                                 <li><Link class="dropdown-item" to="/myaccount">Your Account</Link></li>
                                                 <li><Link class="dropdown-item" to="/yourorder">Your Orders</Link></li>
-                                                <li><Link class="dropdown-item" to="/category">Sign Out</Link></li>
+                                                <li><Link class="dropdown-item" to="/logout">Sign Out</Link></li>
                                             </ul>
                                         </li> :
                                         <>

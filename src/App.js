@@ -69,7 +69,7 @@ function App() {
           <Route path='/trackorder' element={<TrackYourOrder/>}></Route>
           <Route path='/myaccount' element={<MyAccount/>}></Route>
           <Route path='/signup' element={<Signup viewToast={viewToast}/>}></Route>
-          <Route path='/sell' element={<Sell/>}></Route>
+          <Route path='/sell' element={<Sell viewToast={viewToast}/>}></Route>
           <Route path='/see' element={<Form/>}></Route>
           <Route path='/login' element={<Login viewToast={viewToast}/>}></Route>
           <Route path='/forgetpass' element={<ForgetPassword viewToast={viewToast}/>}></Route>
