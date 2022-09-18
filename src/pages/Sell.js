@@ -80,30 +80,34 @@ export const Sell = (props) => {
             //     const img = res.data
             //     values.frontcover = img
             //     values.backcover = img
-            //     const json = JSON.stringify(values, null, 2)
-            //     axios.post("http://localhost:9999/addbook", json, {
-            //         headers: {
-            //             'Content-Type': 'application/json'
-            //         }
-            //     }).then((res) => {
-            //         if (res.status === 200) {
-            //             props.viewToast("success", `${res.data.bookname} book added...`)
-            //             console.log(res);
-            //             resetForm({ values: '' })
-            //             // setTimeout(() => {
-            //             //     navigate("")
-            //             // }, 1000);
-            //         } else {
-            //             props.viewToast("error", "Server might be down")
-            //         }
-            //     })
+                formik.values.cover = image
+                const json = JSON.stringify(values, null, 2)
+                axios.post("http://localhost:9999/addbook", json, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then((res) => {
+                    if (res.status === 200) {
+                        props.viewToast("success", `${res.data.bookname} book added...`)
+                        console.log(res);
+                        document.getElementById("frontcover").value = ''
+                        document.getElementById("backcover").value = ''
+                        resetForm({ values: '' })
+                        setimage(null)
+                        setisdone(false)
+                        // setTimeout(() => {
+                        //     navigate("")
+                        // }, 1000);
+                    } else {
+                        props.viewToast("error", "Server might be down")
+                    }
+                })
             // } else {
             //     props.viewToast("Error", "Images not uploaded")
             // }
             // })
         }
     })
-    console.log(formik.values);
     useEffect(() => {
         if (sessionStorage.getItem("userdata") == null) {
             console.log("not signed in")
