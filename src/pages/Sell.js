@@ -11,8 +11,41 @@ import { NavigationBar } from '../components/NavigationBar'
 
 export const Sell = (props) => {
     const [authtoken, setauthtoken] = useState(null)
+    const [userid, setuserid] = useState(null)
+    const [image, setimage] = useState(null)
+    const [isdone, setisdone] = useState(false)
     const navigate = useNavigate()
 
+    const fileuploadfront = async (e) => {
+
+        const formdata = new FormData()
+        // formdata.append("name" , formik.values.bookname)
+        formdata.append("frontcover", e.target.files[0])
+        await axios.post("http://localhost:9999/frontcoverupload", formdata, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'authToken': authtoken,
+                'userid': userid
+            }
+        }).then(res => {
+            setimage(res.data)
+        })
+    }
+
+    const fileuploadback = async (e) => {
+        const formdata = new FormData()
+        formdata.append("backcover", e.target.files[0])
+        await axios.post("http://localhost:9999/backcoverupload", formdata, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'authToken': authtoken,
+                'userid': userid,
+                "imgdata" : image
+            }
+        }).then(res => {
+            setisdone(true)
+        })
+    }
     const formik = useFormik({
         initialValues: {
             bookname: "",
@@ -20,27 +53,54 @@ export const Sell = (props) => {
             isbn: "",
             genre: "",
             price: "",
-            frontcover: null,
-            backcover: null
+            cover: image
         },
-        onSubmit: (values, { resetform }) => {
-            const json = JSON.stringify(values,null,2)
-            axios.post("http://localhost:9999/addbook",json,{
-                headers : {
-                    'Content-Type' : 'application/json'
-                }
-            }).then((res) =>{
-                if(res.status === 200) {
-                    props.viewToast("success" , `${res.data.bookname} book added...`)
-                    console.log(res);
-                    resetform({values : ''})
-                    // setTimeout(() => {
-                    //     navigate("")
-                    // }, 1000);
-                } else {
-                    props.viewToast("error","Server might be down")
-                }
-            })
+        onSubmit: (values, { resetForm }) => {
+            // console.log("This is submut");
+            // const imgdata = {
+            //     name: values.bookname,
+            //     frontcover: values.frontcover,
+            //     backcover: values.backcover
+            // }
+
+
+            // var formData = new FormData()
+            // formData.append("name",values.bookname)
+            // formData.append("frontcover",values.frontcover)
+            // formData.append("backcover",values.backcover)
+            // axios.post("http://localhost:9999/upload", formdata, {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //         'authToken': authtoken,
+            //         'userid': userid
+            //     }
+            // }).then((res) => {
+            //     console.log(res);
+            // if (res.status === 200) {
+            //     const img = res.data
+            //     values.frontcover = img
+            //     values.backcover = img
+            //     const json = JSON.stringify(values, null, 2)
+            //     axios.post("http://localhost:9999/addbook", json, {
+            //         headers: {
+            //             'Content-Type': 'application/json'
+            //         }
+            //     }).then((res) => {
+            //         if (res.status === 200) {
+            //             props.viewToast("success", `${res.data.bookname} book added...`)
+            //             console.log(res);
+            //             resetForm({ values: '' })
+            //             // setTimeout(() => {
+            //             //     navigate("")
+            //             // }, 1000);
+            //         } else {
+            //             props.viewToast("error", "Server might be down")
+            //         }
+            //     })
+            // } else {
+            //     props.viewToast("Error", "Images not uploaded")
+            // }
+            // })
         }
     })
     console.log(formik.values);
@@ -51,7 +111,9 @@ export const Sell = (props) => {
             navigate("/login")
         } else {
             setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+            setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
             console.log("authtokebn ", authtoken);
+
         }
     })
 
@@ -196,8 +258,7 @@ export const Sell = (props) => {
                                         label="Front Cover"
                                         variant="outlined"
                                         type="file"
-                                        value={formik.values.frontcover}
-                                        onChange={formik.handleChange}
+                                        onChange={(e) => fileuploadfront(e)}
                                         InputLabelProps={{ shrink: true }}
                                     />
                                 </Grid>
@@ -210,13 +271,13 @@ export const Sell = (props) => {
                                         label="Back Cover"
                                         variant="outlined"
                                         type="file"
-                                        value={formik.values.backcover}
-                                        onChange={formik.handleChange}
+                                        onChange={(e) => fileuploadback(e)}
                                         InputLabelProps={{ shrink: true }}
+                                        disabled={image == null ? true : false}
                                     />
                                 </Grid>
                             </Grid>
-                            <Button variant="outlined" type="submit"  color="success" sx={{ m: 2, width: "50%" }} >
+                            <Button variant="outlined" type="submit" color="success" disabled={isdone ? false : true} sx={{ m: 2, width: "50%" }} >
                                 Sell
                             </Button>
                         </form>
