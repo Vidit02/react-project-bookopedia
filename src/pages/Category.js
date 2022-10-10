@@ -1,10 +1,27 @@
-import React from 'react'
+import axios, { Axios } from 'axios'
+import React, { useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { AllCss } from '../components/AllCss'
 import { Footer } from '../components/Footer'
 import { NavigationBar } from '../components/NavigationBar'
 
 export const Category = (props) => {
+    const [products, setproducts] = useState()
+    const [isloading, setisloading] = useState(true)
+    useEffect(() => {
+      const fetchData = async () =>{
+        axios.get("http://localhost:9999/products").then((res=>{
+            console.log("data-->"+JSON.stringify(res.data[0].cover));
+            console.log(res);
+        }))
+      }
+      fetchData()
+    }, [])
+    
+
+
+
     // props.seedata()
     return (
         <div>
@@ -196,246 +213,6 @@ export const Category = (props) => {
                                     </Link>
                                     <small className="text-muted d-block">5 colours, 6 sizes</small>
                                     <p className="mt-2 mb-0 small text-muted">Sold Out</p>
-                                </div>
-                            </div>
-                            {/*/ Card Product*/}
-                        </div>
-                        <div className="col-12 col-sm-6 col-lg-4">
-                            {/* Card Product*/}
-                            <div className="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                                <div className="card-img position-relative">
-                                    <div className="card-badges"></div>
-                                    <span className="position-absolute top-0 end-0 p-2 z-index-20 text-muted">
-                                        <i className="ri-heart-line" />
-                                    </span>
-                                    <picture className="position-relative overflow-hidden d-block bg-light">
-                                        <img
-                                            className="w-100 img-fluid position-relative z-index-10"
-                                            title=""
-                                            src="./assets/images/products/product-4.jpg"
-                                            alt=""
-                                        />
-                                    </picture>
-                                    <div className="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button className="btn btn-quick-add">
-                                            <i className="ri-add-line me-2" /> Quick Add
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="card-body px-0">
-                                    <Link
-                                        className="text-decoration-none link-cover"
-                                        to="/product"
-                                    >
-                                        Nike Air Force 1
-                                    </Link>
-                                    <small className="text-muted d-block">6 colours, 9 sizes</small>
-                                    <p className="mt-2 mb-0 small">$425.85</p>
-                                </div>
-                            </div>
-                            {/*/ Card Product*/}
-                        </div>
-                        <div className="col-12 col-sm-6 col-lg-4">
-                            {/* Card Product*/}
-                            <div className="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                                <div className="card-img position-relative">
-                                    <div className="card-badges">
-                                        <span className="badge badge-card">
-                                            <span className="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1" />{" "}
-                                            Sale
-                                        </span>
-                                    </div>
-                                    <span className="position-absolute top-0 end-0 p-2 z-index-20 text-muted">
-                                        <i className="ri-heart-line" />
-                                    </span>
-                                    <picture className="position-relative overflow-hidden d-block bg-light">
-                                        <img
-                                            className="w-100 img-fluid position-relative z-index-10"
-                                            title=""
-                                            src="./assets/images/products/product-5.jpg"
-                                            alt=""
-                                        />
-                                    </picture>
-                                    <div className="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button className="btn btn-quick-add">
-                                            <i className="ri-add-line me-2" /> Quick Add
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="card-body px-0">
-                                    <Link
-                                        className="text-decoration-none link-cover"
-                                        to="/product"
-                                    >
-                                        Nike Air Max 90
-                                    </Link>
-                                    <small className="text-muted d-block">4 colours, 10 sizes</small>
-                                    <p className="mt-2 mb-0 small">
-                                        <s className="text-muted">$196.99</s>{" "}
-                                        <span className="text-danger">$98.66</span>
-                                    </p>
-                                </div>
-                            </div>
-                            {/*/ Card Product*/}
-                        </div>
-                        <div className="col-12 col-sm-6 col-lg-4">
-                            {/* Card Product*/}
-                            <div className="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                                <div className="card-img position-relative">
-                                    <div className="card-badges">
-                                        <span className="badge badge-card">
-                                            <span className="f-w-2 f-h-2 bg-danger rounded-circle d-block me-1" />{" "}
-                                            Sale
-                                        </span>
-                                        <span className="badge badge-card">
-                                            <span className="f-w-2 f-h-2 bg-success rounded-circle d-block me-1" />{" "}
-                                            New In
-                                        </span>
-                                    </div>
-                                    <span className="position-absolute top-0 end-0 p-2 z-index-20 text-muted">
-                                        <i className="ri-heart-line" />
-                                    </span>
-                                    <picture className="position-relative overflow-hidden d-block bg-light">
-                                        <img
-                                            className="w-100 img-fluid position-relative z-index-10"
-                                            title=""
-                                            src="./assets/images/products/product-6.jpg"
-                                            alt=""
-                                        />
-                                    </picture>
-                                    <div className="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button className="btn btn-quick-add">
-                                            <i className="ri-add-line me-2" /> Quick Add
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="card-body px-0">
-                                    <Link
-                                        className="text-decoration-none link-cover"
-                                        to="/product"
-                                    >
-                                        Nike Glide FlyEase
-                                    </Link>
-                                    <small className="text-muted d-block">1 colour</small>
-                                    <p className="mt-2 mb-0 small">
-                                        <s className="text-muted">$329.99</s>{" "}
-                                        <span className="text-danger">$198.66</span>
-                                    </p>
-                                </div>
-                            </div>
-                            {/*/ Card Product*/}
-                        </div>
-                        <div className="col-12 col-sm-6 col-lg-4">
-                            {/* Card Product*/}
-                            <div className="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                                <div className="card-img position-relative">
-                                    <div className="card-badges"></div>
-                                    <span className="position-absolute top-0 end-0 p-2 z-index-20 text-muted">
-                                        <i className="ri-heart-line" />
-                                    </span>
-                                    <picture className="position-relative overflow-hidden d-block bg-light">
-                                        <img
-                                            className="w-100 img-fluid position-relative z-index-10"
-                                            title=""
-                                            src="./assets/images/products/product-7.jpg"
-                                            alt=""
-                                        />
-                                    </picture>
-                                    <div className="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button className="btn btn-quick-add">
-                                            <i className="ri-add-line me-2" /> Quick Add
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="card-body px-0">
-                                    <Link
-                                        className="text-decoration-none link-cover"
-                                        to="/product"
-                                    >
-                                        Nike Zoom Freak
-                                    </Link>
-                                    <small className="text-muted d-block">2 colours, 2 sizes</small>
-                                    <p className="mt-2 mb-0 small">$444.99</p>
-                                </div>
-                            </div>
-                            {/*/ Card Product*/}
-                        </div>
-                        <div className="col-12 col-sm-6 col-lg-4">
-                            {/* Card Product*/}
-                            <div className="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                                <div className="card-img position-relative">
-                                    <div className="card-badges">
-                                        <span className="badge badge-card">
-                                            <span className="f-w-2 f-h-2 bg-success rounded-circle d-block me-1" />{" "}
-                                            New In
-                                        </span>
-                                    </div>
-                                    <span className="position-absolute top-0 end-0 p-2 z-index-20 text-muted">
-                                        <i className="ri-heart-line" />
-                                    </span>
-                                    <picture className="position-relative overflow-hidden d-block bg-light">
-                                        <img
-                                            className="w-100 img-fluid position-relative z-index-10"
-                                            title=""
-                                            src="./assets/images/products/product-8.jpg"
-                                            alt=""
-                                        />
-                                    </picture>
-                                    <div className="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button className="btn btn-quick-add">
-                                            <i className="ri-add-line me-2" /> Quick Add
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="card-body px-0">
-                                    <Link
-                                        className="text-decoration-none link-cover"
-                                        to="/product"
-                                    >
-                                        Nike Air Pegasus
-                                    </Link>
-                                    <small className="text-muted d-block">3 colours, 10 sizes</small>
-                                    <p className="mt-2 mb-0 small">$178.99</p>
-                                </div>
-                            </div>
-                            {/*/ Card Product*/}
-                        </div>
-                        <div className="col-12 col-sm-6 col-lg-4">
-                            {/* Card Product*/}
-                            <div className="card border border-transparent position-relative overflow-hidden h-100 transparent">
-                                <div className="card-img position-relative">
-                                    <div className="card-badges">
-                                        <span className="badge badge-card">
-                                            <span className="f-w-2 f-h-2 bg-success rounded-circle d-block me-1" />{" "}
-                                            New In
-                                        </span>
-                                    </div>
-                                    <span className="position-absolute top-0 end-0 p-2 z-index-20 text-muted">
-                                        <i className="ri-heart-line" />
-                                    </span>
-                                    <picture className="position-relative overflow-hidden d-block bg-light">
-                                        <img
-                                            className="w-100 img-fluid position-relative z-index-10"
-                                            title=""
-                                            src="./assets/images/products/product-1.jpg"
-                                            alt=""
-                                        />
-                                    </picture>
-                                    <div className="position-absolute start-0 bottom-0 end-0 z-index-20 p-2">
-                                        <button className="btn btn-quick-add">
-                                            <i className="ri-add-line me-2" /> Quick Add
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="card-body px-0">
-                                    <Link
-                                        className="text-decoration-none link-cover"
-                                        to="/product"
-                                    >
-                                        Nike Air Jordans
-                                    </Link>
-                                    <small className="text-muted d-block">3 colours, 10 sizes</small>
-                                    <p className="mt-2 mb-0 small">$154.99</p>
                                 </div>
                             </div>
                             {/*/ Card Product*/}

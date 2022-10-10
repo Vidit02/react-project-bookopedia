@@ -12,7 +12,8 @@ import { NavigationBar } from '../components/NavigationBar'
 export const Sell = (props) => {
     const [authtoken, setauthtoken] = useState(null)
     const [userid, setuserid] = useState(null)
-    const [image, setimage] = useState(null)
+    const [frontcover, setfrontcover] = useState(null)
+    const [backcover, setbackcover] = useState(null)
     const [isdone, setisdone] = useState(false)
     const navigate = useNavigate()
 
@@ -20,29 +21,31 @@ export const Sell = (props) => {
 
         const formdata = new FormData()
         // formdata.append("name" , formik.values.bookname)
-        formdata.append("frontcover", e.target.files[0])
-        await axios.post("http://localhost:9999/frontcoverupload", formdata, {
+        formdata.append("file", e.target.files[0])
+        formdata.append("name",formik.values.bookname)
+        await axios.post("http://localhost:9999/uploadfrontcover", formdata, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'authToken': authtoken,
-                'userid': userid
+                'userId': userid
             }
         }).then(res => {
-            setimage(res.data)
+            setfrontcover(res.data)
         })
     }
 
     const fileuploadback = async (e) => {
         const formdata = new FormData()
-        formdata.append("backcover", e.target.files[0])
-        await axios.post("http://localhost:9999/backcoverupload", formdata, {
+        formdata.append("file", e.target.files[0])
+        formdata.append("name",formik.values.bookname)
+        await axios.post("http://localhost:9999/uploadbackcover", formdata, {
             headers: {
                 'Content-Type': 'multipart/form-data',
                 'authToken': authtoken,
-                'userid': userid,
-                "imgdata" : image
+                'userId': userid
             }
         }).then(res => {
+            setbackcover(res.data)
             setisdone(true)
         })
     }
@@ -53,7 +56,8 @@ export const Sell = (props) => {
             isbn: "",
             genre: "",
             price: "",
-            cover: image
+            frontcover: frontcover,
+            backcover : backcover
         },
         onSubmit: (values, { resetForm }) => {
             // console.log("This is submut");
@@ -80,7 +84,8 @@ export const Sell = (props) => {
             //     const img = res.data
             //     values.frontcover = img
             //     values.backcover = img
-                formik.values.cover = image
+                formik.values.frontcover = frontcover
+                formik.values.backcover  = backcover
                 const json = JSON.stringify(values, null, 2)
                 axios.post("http://localhost:9999/addbook", json, {
                     headers: {
@@ -93,7 +98,6 @@ export const Sell = (props) => {
                         document.getElementById("frontcover").value = ''
                         document.getElementById("backcover").value = ''
                         resetForm({ values: '' })
-                        setimage(null)
                         setisdone(false)
                         // setTimeout(() => {
                         //     navigate("")
@@ -277,7 +281,7 @@ export const Sell = (props) => {
                                         type="file"
                                         onChange={(e) => fileuploadback(e)}
                                         InputLabelProps={{ shrink: true }}
-                                        disabled={image == null ? true : false}
+                                        disabled={frontcover == null ? true : false}
                                     />
                                 </Grid>
                             </Grid>
