@@ -29,6 +29,7 @@ import { ForgetPassword } from './pages/ForgetPassword';
 import { OtpCheck } from './pages/OtpCheck';
 import { ErrorPage } from './pages/ErrorPage';
 import { Logout } from './pages/Logout';
+import { ProductDetail } from './pages/ProductDetail';
 
 
 function App() {
@@ -50,11 +51,13 @@ function App() {
   // }
   return (
     <div className="App">
+        <AllCss/>
         <Toaster mode={settoast} msg={msg}></Toaster>
         <Routes>
           <Route path='/index' element={<HomePage/>}></Route>
           <Route path='/' element={<HomePage/>}></Route>
-          <Route path='/category' element={<Category viewToast={viewToast} />}></Route>
+          <Route path='/category' element={<Category viewToast={viewToast} />}>
+          </Route>
           <Route path='/product' element={<Product/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>

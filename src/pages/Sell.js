@@ -89,7 +89,8 @@ export const Sell = (props) => {
                 const json = JSON.stringify(values, null, 2)
                 axios.post("http://localhost:9999/addbook", json, {
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'userid' : userid
                     }
                 }).then((res) => {
                     if (res.status === 200) {

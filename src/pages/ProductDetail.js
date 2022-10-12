@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react'
-// import "../assets/css/"
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { AllCss } from '../components/AllCss'
-import { Footer } from '../components/Footer'
 import { NavigationBar } from '../components/NavigationBar'
 
-export const Product = () => {
-    useEffect(() => {
-        console.log("Hello this is vidit")
-        setInterval(() => {
-            
-        }, 5000);
-    }, [])
-    
+export const ProductDetail = () => {
     return (
         <div>
+            <AllCss/>
             <NavigationBar/>
             <section class="mt-0">
                 <div class="bg-dark py-6">
@@ -776,7 +768,7 @@ export const Product = () => {
                     </div>
                 </div>
             </section >
-            <Footer/>
+
         </div>
     )
 }
