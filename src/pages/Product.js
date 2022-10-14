@@ -16,6 +16,31 @@ export const Product = () => {
     const [isLoading, setisLoading] = useState(true)
     const [isProLoading, setIsProLoading] = useState(true)
     const [fast, setFast] = useState(false)
+    const [isuser, setIsuser] = useState(true)
+    const [authtoken, setauthtoken] = useState()
+    const [userid, setuserid] = useState()
+
+    const addToCart = async () => {
+        axios.post("http://localhost:9999/addBookToCart",{"id":prodata.data.id},{
+            headers : {
+                'Content-Type' : 'application/json',
+                'userid' : userid,
+                'authToken' : authtoken
+            }
+        }).then((res)=>{
+            console.log(res);
+        })
+    }
+    useEffect(() => {
+        if (sessionStorage.getItem("userdata") !== null) {
+            setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+            setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+            setIsuser(false)
+        } else {
+            setIsuser(true)
+        }
+    })
+    
     useEffect(() => {
         const fetchData = async () => {
             axios.get("http://localhost:9999/products").then((res => {
@@ -136,7 +161,7 @@ export const Product = () => {
                                                         </div>
                                                     </small>
                                                 </div>
-                                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow">Add To Shopping Bag</button>
+                                                <button class="btn btn-dark w-100 mt-4 mb-0 hover-lift-sm hover-boxshadow" disabled={isuser}  onClick={()=>addToCart()}>Add To Shopping Bag</button>
                                                 {/* Product Features */}
                                                 <div class="my-5">
                                                     <div class="row">
