@@ -11,12 +11,11 @@ export const AllCss = () => {
                 <link rel="mask-icon" href="./assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5" />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff"></meta>
-                <link rel="stylesheet" href="./assets/css/libs.bundle.css" />
-                <link rel="stylesheet" href="./assets/css/theme.bundle.css" />
+                <link rel="stylesheet" href="/assets/css/libs.bundle.css" />
+                <link rel="stylesheet" href="/assets/css/theme.bundle.css" />
                 <script src="./assets/js/vendor.bundle.js"></script>
                 <script src="./assets/js/theme.bundle.js"></script>
                 <script src="./assets/js/opt"></script>
-                
             </Helmet>
         </div>
     )

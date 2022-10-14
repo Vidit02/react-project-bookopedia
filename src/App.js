@@ -56,8 +56,8 @@ function App() {
         <Routes>
           <Route path='/index' element={<HomePage/>}></Route>
           <Route path='/' element={<HomePage/>}></Route>
-          <Route path='/category' element={<Category viewToast={viewToast} />}>
-          </Route>
+          <Route path='/category' element={<Category viewToast={viewToast} />}></Route>
+          <Route path='/product/:id' element={<Product/>}></Route>
           <Route path='/product' element={<Product/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>
