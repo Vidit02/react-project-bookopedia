@@ -49,7 +49,8 @@ export const Login = (props) => {
                         name : res.data.username,
                         email : res.data.email,
                         authtoken : res.data.authtoken,
-                        userid : res.data.userid
+                        userid : res.data.userid,
+                        cartid : res.data.cartid
                     }
                     sessionStorage.setItem("userdata" , JSON.stringify(userjson))
                     // props.loggedin(true)

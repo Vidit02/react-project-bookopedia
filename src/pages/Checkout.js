@@ -40,11 +40,6 @@ export const Checkout = () => {
                                             </Link>
                                         </li>
                                         <li className="me-4">
-                                            <Link className="nav-link-checkout active" to="/checkout">
-                                                Information
-                                            </Link>
-                                        </li>
-                                        <li className="me-4">
                                             <Link
                                                 className="nav-link-checkout "
                                                 to="/checkoutshipping"

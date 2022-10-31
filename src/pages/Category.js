@@ -24,7 +24,6 @@ export const Category = (props) => {
         fetchData()
     }, [])
     console.log("Res data", products);
-
     // props.seedata()
     return (
         <div>
@@ -143,7 +142,7 @@ export const Category = (props) => {
                                             <div className="card-body px-0">
                                                 <Link
                                                     className="text-decoration-none link-cover"
-                                                    to="/category/12"
+                                                    to={`/product/${book.id}`}
                                                     style={{ fontSize: "20px" }}
                                                 >
                                                     {book.bookname}

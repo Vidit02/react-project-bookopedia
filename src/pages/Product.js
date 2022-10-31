@@ -8,7 +8,7 @@ import { AllCss } from '../components/AllCss'
 import { Footer } from '../components/Footer'
 import { NavigationBar } from '../components/NavigationBar'
 
-export const Product = () => {
+export const Product = (props) => {
 
     var productid = useParams().id;
     const [products, setproducts] = useState([])
@@ -28,6 +28,7 @@ export const Product = () => {
                 'authToken' : authtoken
             }
         }).then((res)=>{
+            props.viewToast("success",`${res.data.data}`)
             console.log(res);
         })
     }
@@ -53,7 +54,7 @@ export const Product = () => {
             axios.get("http://localhost:9999/product/" + productid).then((res => {
                 setProdata(res.data)
                 setIsProLoading(false)
-                console.log("This is the single produc");
+                console.log("Thi    s is the single produc");
             }))
         }
         fetchData();
@@ -99,7 +100,7 @@ export const Product = () => {
                                             </div>
                                             <div class="col-12">
                                                 <picture>
-                                                    <img class="img-fluid" data-zoomable src={`data:image/png;base64,${prodata.data.frontcover}`} alt="HTML Bootstrap Template by Pixel Rocket" />
+                                                    <img class="img-fluid" data-zoomable src={`data:image/png;base64,${prodata.data.backcover}`} alt="HTML Bootstrap Template by Pixel Rocket" />
                                                 </picture>
                                             </div>
                                         </div>

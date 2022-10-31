@@ -1,12 +1,104 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Box, Typography } from '@mui/material'
+import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 import { AllCss } from '../components/AllCss'
 
 export const Cart = () => {
+    const [products, setproducts] = useState([])
+    const [prodata, setProdata] = useState()
+    const [isLoading, setisLoading] = useState(true)
+    const [isuser, setIsuser] = useState(true)
+    const [authtoken, setauthtoken] = useState(null)
+    const [userid, setuserid] = useState(null)
+    const [price, setPrice] = useState(0)
+    const navigate = useNavigate()
+
+
+    // useEffect(() => {
+    //     if (sessionStorage.getItem("userdata") !== null) {
+    //         setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+    //         setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+    //         setIsuser(false)
+    //     } else {
+    //         setIsuser(true)
+    //     }
+    // }, [userid])
+
+    // useEffect(() => {
+    //     const setAttributes = async () => {
+    //         if (sessionStorage.getItem("userdata") !== null) {
+    //             setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+    //             setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+    //             setIsuser(false)
+    //             return true
+    //         } else {
+    //             setIsuser(true)
+    //             return false
+    //         }
+    //     }
+    //     console.log("userid is ", userid, "authtoken is ", authtoken);
+    //     const fetchProductCart = async () => {
+    //         setAttributes()
+    //         axios.get("http://localhost:9999/getPro", {
+    //             headers: {
+    //                 "authToken": authtoken,
+    //                 "userId": userid
+
+    //             }
+    //         }).then((res) => {
+    //             setproducts(res.data.data)
+    //             setisLoading(false)
+    //             console.log("data is ", products)
+    //         })
+    //     }
+    //     if (userid != null) {
+    //         fetchProductCart()
+    //     }
+    // }, [])
+    useEffect(() => {
+        if (sessionStorage.getItem("userdata") !== null && isLoading == true) {
+            setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+            setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+            axios.get("http://localhost:9999/getPro", {
+                headers: {
+                    'userid': userid,
+                    'authToken': authtoken
+                }
+            }).then((res) => {
+                console.log(res);
+                // setCart(false)
+                if (res.data.status == 200) {
+                    console.log(res.data.data);
+                    setisLoading(false)
+                    setproducts(res.data.data)
+                } else {
+                    setisLoading(true)
+                    // setCartnum(0)
+                }
+            })
+            axios.get("http://localhost:9999/getTotalPrice", {
+                headers: {
+                    'userid': userid,
+                    'authToken': authtoken
+                }
+            }).then((res) => {
+                if(res.data.status == 200){
+                    setPrice(res.data.data)
+                }
+            })
+        }
+    })
+
+    console.log("this is productz", products)
+
+
     return (
         <div>
             <AllCss />
-            <section className="mt-0 overflow-lg-hidden  vh-lg-100" style={{ textAlign: "left" }}>
+            <section className="mt-0   vh-lg-100" style={{ textAlign: "left" }}>
                 {/* Page Content Goes Here */}
                 <div className="container">
                     <div className="row g-0 vh-lg-100">
@@ -40,24 +132,11 @@ export const Cart = () => {
                                             </Link>
                                         </li>
                                         <li className="me-4">
-                                            <Link className="nav-link-checkout " to="/checkout">
-                                                Information
-                                            </Link>
-                                        </li>
-                                        <li className="me-4">
                                             <Link
                                                 className="nav-link-checkout "
                                                 to="/checkoutshipping"
                                             >
                                                 Shipping
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link
-                                                className="nav-link-checkout nav-link-last "
-                                                to="/checkoutpayment"
-                                            >
-                                                Payment
                                             </Link>
                                         </li>
                                     </ul>
@@ -67,60 +146,48 @@ export const Cart = () => {
                                         Your Cart
                                     </h3>
                                     <div className="table-responsive">
-                                        <div className="row mx-0 py-4 g-0 border-bottom">
-                                            <div className="col-2 position-relative">
-                                                <picture className="d-block border">
-                                                    <img
-                                                        className="img-fluid"
-                                                        src="./assets/images/products/product-cart-1.jpg"
-                                                        alt="HTML Bootstrap Template by Pixel Rocket"
-                                                    />
-                                                </picture>
-                                            </div>
-                                            <div className="col-9 offset-1">
-                                                <div>
-                                                    <h6 className="justify-content-between d-flex align-items-start mb-2">
-                                                        Nike Air VaporMax 2021
-                                                        <i className="ri-close-line ms-3" />
-                                                    </h6>
-                                                    <span className="d-block text-muted fw-bolder text-uppercase fs-9">
-                                                        Size: 9 / Qty: 1
-                                                    </span>
-                                                </div>
-                                                <p className="fw-bolder text-end text-muted m-0">$85.00</p>
-                                            </div>
-                                        </div>
-                                        <div className="row mx-0 py-4 g-0 border-bottom">
-                                            <div className="col-2 position-relative">
-                                                <picture className="d-block border">
-                                                    <img
-                                                        className="img-fluid"
-                                                        src="./assets/images/products/product-cart-2.jpg"
-                                                        alt="HTML Bootstrap Template by Pixel Rocket"
-                                                    />
-                                                </picture>
-                                            </div>
-                                            <div className="col-9 offset-1">
-                                                <div>
-                                                    <h6 className="justify-content-between d-flex align-items-start mb-2">
-                                                        Nike ZoomX Vaporfly
-                                                        <i className="ri-close-line ms-3" />
-                                                    </h6>
-                                                    <span className="d-block text-muted fw-bolder text-uppercase fs-9">
-                                                        Size: 11 / Qty: 1
-                                                    </span>
-                                                </div>
-                                                <p className="fw-bolder text-end text-muted m-0">$125.00</p>
-                                            </div>
-                                        </div>
-                                        <table className="table align-middle">
-                                            <tbody className="border-0">
-                                                {/* Cart Item*/}
-                                                {/* / Cart Item*/}
-                                                {/* Cart Item*/}
-                                                {/* / Cart Item*/}
-                                            </tbody>
-                                        </table>
+                                        {
+                                            isLoading ? <Box>
+                                                <ClipLoader
+                                                    height={40}
+                                                    loading
+                                                    width={5}
+                                                />
+                                                <Typography component="h1" variant='h6' sx={{ marginTop: "1rem" }}>Loading...</Typography>
+                                                <Typography component="h1" variant='h6'>Please Wait</Typography>
+                                            </Box> :
+                                                <>
+                                                    {
+                                                        products.map((book) => {
+                                                            return (
+                                                                <div className="row mx-0 py-4 g-0 border-bottom">
+                                                                    <div className="col-2 position-relative">
+                                                                        <picture className="d-block border">
+                                                                            <img
+                                                                                className="img-fluid"
+                                                                                src={`data:image/png;base64,${book.frontcover}`}
+                                                                                alt="HTML Bootstrap Template by Pixel Rocket"
+                                                                            />
+                                                                        </picture>
+                                                                    </div>
+                                                                    <div className="col-9 offset-1">
+                                                                        <div>
+                                                                            <h6 className="justify-content-between d-flex align-items-start mb-2">
+                                                                                {book.bookname}
+                                                                                <i className="ri-close-line ms-3" />
+                                                                            </h6>
+                                                                            <span className="d-block text-muted fw-bolder text-uppercase fs-9">
+                                                                                Qty: 1
+                                                                            </span>
+                                                                        </div>
+                                                                        <p className="fw-bolder text-end text-muted m-0">Rs. {book.price}</p>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })
+                                                    }
+                                                </>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -131,9 +198,9 @@ export const Cart = () => {
                                     <div className="d-flex flex-column flex-md-row justify-content-md-between mb-4 mb-md-2">
                                         <div>
                                             <p className="m-0 fw-bold fs-5">Grand Total</p>
-                                            <span className="text-muted small">Inc $45.89 sales tax</span>
+                                            <span className="text-muted small">Inc of sales tax</span>
                                         </div>
-                                        <p className="m-0 fs-5 fw-bold">$422.99</p>
+                                        <p className="m-0 fs-5 fw-bold">Rs. {price}</p>
                                     </div>
                                 </div>
                                 <div className="py-4">
@@ -147,7 +214,7 @@ export const Cart = () => {
                                     </div>
                                 </div>
                                 <Link
-                                    to="/checkout"
+                                    to="/checkoutshipping"
                                     className="btn btn-dark w-100 text-center"
                                     role="button"
                                 >

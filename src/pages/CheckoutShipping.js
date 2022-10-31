@@ -1,8 +1,55 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Box, Typography } from '@mui/material'
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 import { AllCss } from '../components/AllCss'
 
 export const CheckoutShipping = () => {
+    const [products, setproducts] = useState([])
+    const [prodata, setProdata] = useState()
+    const [isLoading, setisLoading] = useState(true)
+    const [isuser, setIsuser] = useState(true)
+    const [user, setUser] = useState()
+    const [authtoken, setauthtoken] = useState(null)
+    const [userid, setuserid] = useState(null)
+    const [price, setPrice] = useState(0)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (sessionStorage.getItem("userdata") !== null && isLoading == true) {
+            setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+            setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+            axios.get("http://localhost:9999/getPro", {
+                headers: {
+                    'userid': userid,
+                    'authToken': authtoken
+                }
+            }).then((res) => {
+                console.log(res);
+                // setCart(false)
+                if (res.data.status == 200) {
+                    console.log(res.data.data);
+                    setisLoading(false)
+                    setproducts(res.data.data)
+                } else {
+                    setisLoading(true)
+                    // setCartnum(0)
+                }
+            })
+            axios.get("http://localhost:9999/getTotalPrice", {
+                headers: {
+                    'userid': userid,
+                    'authToken': authtoken
+                }
+            }).then((res) => {
+                if (res.data.status == 200) {
+                    setPrice(res.data.data)
+                }
+            })
+        }
+    })
+
     return (
         <div>
             <AllCss />
@@ -40,11 +87,6 @@ export const CheckoutShipping = () => {
                                             </Link>
                                         </li>
                                         <li className="me-4">
-                                            <Link className="nav-link-checkout " to="/checkout">
-                                                Information
-                                            </Link>
-                                        </li>
-                                        <li className="me-4">
                                             <Link
                                                 className="nav-link-checkout active"
                                                 to="/checkoutshipping"
@@ -52,35 +94,10 @@ export const CheckoutShipping = () => {
                                                 Shipping
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link
-                                                className="nav-link-checkout nav-link-last "
-                                                to="/checkoutpayment"
-                                            >
-                                                Payment
-                                            </Link>
-                                        </li>
                                     </ul>
                                 </nav>{" "}
                                 <div className="mt-5">
                                     {/* Checkout Information Summary */}
-                                    <ul className="list-group mb-5 d-none d-lg-block rounded-0">
-                                        <li className="list-group-item d-flex justify-content-between align-items-center">
-                                            <div className="d-flex justify-content-start align-items-center">
-                                                <span className="text-muted small me-2 f-w-36 fw-bolder">
-                                                    Contact
-                                                </span>
-                                                <span className="small">test@email.com</span>
-                                            </div>
-                                            <Link
-                                                to="/checkout"
-                                                className="text-muted small"
-                                                role="button"
-                                            >
-                                                Change
-                                            </Link>
-                                        </li>
-                                    </ul>
                                     {/* / Checkout Information Summary*/}
                                     {/* Checkout Panel Information*/}
                                     <h3 className="fs-5 fw-bolder mb-4 border-bottom pb-4">
@@ -99,13 +116,13 @@ export const CheckoutShipping = () => {
                                             className="form-check-label"
                                             htmlFor="checkoutShippingMethodOne"
                                         >
-                                            <span className="d-flex justify-content-between align-items-start">
+                                            <span className="d-flex justify-content-between align-items-left">
                                                 <span>
                                                     <span className="mb-0 fw-bolder d-block">
-                                                        Click &amp; Collect Shipping
+                                                        Normal Delivery
                                                     </span>
                                                     <small className="fw-bolder">
-                                                        Collect from our London store
+                                                        Will be delivered in 7-10 days
                                                     </small>
                                                 </span>
                                                 <span className="small fw-bolder text-uppercase">Free</span>
@@ -126,35 +143,12 @@ export const CheckoutShipping = () => {
                                         >
                                             <span className="d-flex justify-content-between align-items-start">
                                                 <span>
-                                                    <span className="mb-0 fw-bolder d-block">UPS Next Day</span>
+                                                    <span className="mb-0 fw-bolder d-block">Early Delivery</span>
                                                     <small className="fw-bolder">
-                                                        For all orders placed before 1pm Monday to Thursday
+                                                        Will be delivered in 2-3 days
                                                     </small>
                                                 </span>
-                                                <span className="small fw-bolder text-uppercase">$19.99</span>
-                                            </span>
-                                        </label>
-                                    </div>
-                                    {/* Shipping Option*/}
-                                    <div className="form-check form-group form-check-custom form-radio-custom form-radio-highlight mb-3">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name="checkoutShippingMethod"
-                                            id="checkoutShippingMethodThree"
-                                        />
-                                        <label
-                                            className="form-check-label"
-                                            htmlFor="checkoutShippingMethodThree"
-                                        >
-                                            <span className="d-flex justify-content-between align-items-start">
-                                                <span>
-                                                    <span className="mb-0 fw-bolder d-block">
-                                                        DHL Priority Service
-                                                    </span>
-                                                    <small className="fw-bolder">24 - 36 hour delivery</small>
-                                                </span>
-                                                <span className="small fw-bolder text-uppercase">$9.99</span>
+                                                <span className="small fw-bolder text-uppercase">Rs. 100</span>
                                             </span>
                                         </label>
                                     </div>
@@ -171,7 +165,7 @@ export const CheckoutShipping = () => {
                                             className="btn btn-dark w-100 w-md-auto"
                                             role="button"
                                         >
-                                            Proceed to payment
+                                            Proceed to place Order
                                         </Link>
                                     </div>
                                 </div>
@@ -180,76 +174,68 @@ export const CheckoutShipping = () => {
                         <div className="col-12 col-lg-5 bg-light pt-lg-10 aside-checkout pb-5 pb-lg-0 my-5 my-lg-0">
                             <div className="p-4 py-lg-0 pe-lg-0 ps-lg-5">
                                 <div className="pb-3">
+                                    {
+                                        isLoading ? <Box>
+                                            <ClipLoader
+                                                height={40}
+                                                loading
+                                                width={5}
+                                            />
+                                            <Typography component="h1" variant='h6' sx={{ marginTop: "1rem" }}>Loading...</Typography>
+                                            <Typography component="h1" variant='h6'>Please Wait</Typography>
+                                        </Box> : <>
+                                            {
+                                                products.map((book) => {
+                                                    return (
+                                                        <div className="row mx-0 py-4 g-0 border-bottom">
+                                                            <div className="col-2 position-relative">
+                                                                <span className="checkout-item-qty">3</span>
+                                                                <picture className="d-block border">
+                                                                    <img
+                                                                        className="img-fluid"
+                                                                        src={`data:image/png;base64,${book.frontcover}`}
+                                                                        alt="HTML Bootstrap Template by Pixel Rocket"
+                                                                    />
+                                                                </picture>
+                                                            </div>
+                                                            <div className="col-9 offset-1">
+                                                                <div>
+                                                                    <h6 className="justify-content-between d-flex align-items-start mb-2">
+                                                                        {book.bookname}
+                                                                        <i className="ri-close-line ms-3" />
+                                                                    </h6>
+                                                                    <span className="d-block text-muted fw-bolder text-uppercase fs-9">
+                                                                        Qty: 1
+                                                                    </span>
+                                                                </div>
+                                                                <p className="fw-bolder text-end text-muted m-0">Rs. {book.price}</p>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </>
+                                    }
                                     {/* Cart Item*/}
-                                    <div className="row mx-0 py-4 g-0 border-bottom">
-                                        <div className="col-2 position-relative">
-                                            <span className="checkout-item-qty">3</span>
-                                            <picture className="d-block border">
-                                                <img
-                                                    className="img-fluid"
-                                                    src="./assets/images/products/product-cart-1.jpg"
-                                                    alt="HTML Bootstrap Template by Pixel Rocket"
-                                                />
-                                            </picture>
-                                        </div>
-                                        <div className="col-9 offset-1">
-                                            <div>
-                                                <h6 className="justify-content-between d-flex align-items-start mb-2">
-                                                    Nike Air VaporMax 2021
-                                                    <i className="ri-close-line ms-3" />
-                                                </h6>
-                                                <span className="d-block text-muted fw-bolder text-uppercase fs-9">
-                                                    Size: 9 / Qty: 1
-                                                </span>
-                                            </div>
-                                            <p className="fw-bolder text-end text-muted m-0">$85.00</p>
-                                        </div>
-                                    </div>{" "}
-                                    {/* / Cart Item*/}
-                                    {/* Cart Item*/}
-                                    <div className="row mx-0 py-4 g-0 border-bottom">
-                                        <div className="col-2 position-relative">
-                                            <span className="checkout-item-qty">3</span>
-                                            <picture className="d-block border">
-                                                <img
-                                                    className="img-fluid"
-                                                    src="./assets/images/products/product-cart-2.jpg"
-                                                    alt="HTML Bootstrap Template by Pixel Rocket"
-                                                />
-                                            </picture>
-                                        </div>
-                                        <div className="col-9 offset-1">
-                                            <div>
-                                                <h6 className="justify-content-between d-flex align-items-start mb-2">
-                                                    Nike ZoomX Vaporfly
-                                                    <i className="ri-close-line ms-3" />
-                                                </h6>
-                                                <span className="d-block text-muted fw-bolder text-uppercase fs-9">
-                                                    Size: 11 / Qty: 1
-                                                </span>
-                                            </div>
-                                            <p className="fw-bolder text-end text-muted m-0">$125.00</p>
-                                        </div>
-                                    </div>{" "}
-                                    {/* / Cart Item*/}
+
                                 </div>
                                 <div className="py-4 border-bottom">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
                                         <p className="m-0 fw-bolder fs-6">Subtotal</p>
-                                        <p className="m-0 fs-6 fw-bolder">$422.99</p>
+                                        <p className="m-0 fs-6 fw-bolder">Rs. {price}</p>
                                     </div>
                                     <div className="d-flex justify-content-between align-items-center ">
                                         <p className="m-0 fw-bolder fs-6">Shipping</p>
-                                        <p className="m-0 fs-6 fw-bolder">$8.95</p>
+                                        <p className="m-0 fs-6 fw-bolder">FREE</p>
                                     </div>
                                 </div>
                                 <div className="py-4 border-bottom">
                                     <div className="d-flex justify-content-between">
                                         <div>
                                             <p className="m-0 fw-bold fs-5">Grand Total</p>
-                                            <span className="text-muted small">Inc $45.89 sales tax</span>
+                                            <span className="text-muted small">Inc of sales tax</span>
                                         </div>
-                                        <p className="m-0 fs-5 fw-bold">$422.99</p>
+                                        <p className="m-0 fs-5 fw-bold">Rs. {price}</p>
                                     </div>
                                 </div>
                                 <div className="py-4">

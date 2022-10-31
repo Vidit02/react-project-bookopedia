@@ -23,8 +23,6 @@ export const CheckoutPayment = () => {
                                         <li class="me-4"><Link class="nav-link-checkout "
                                             to="/cart">Your Cart</Link></li>
                                         <li class="me-4"><Link class="nav-link-checkout "
-                                            to="/checkout">Information</Link></li>
-                                        <li class="me-4"><Link class="nav-link-checkout "
                                             to="/checkoutshipping">Shipping</Link></li>
                                         <li><Link class="nav-link-checkout nav-link-last active"
                                             to="/checkoutpayment">Payment</Link></li>

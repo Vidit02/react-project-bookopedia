@@ -17,15 +17,35 @@ export const NavigationBar = (props) => {
     const navigate = useNavigate();
     const [name, setname] = useState(null)
     const [email, setemail] = useState(null)
-
+    const [cartnum, setCartnum] = useState(0)
+    const [cart, setCart] = useState(true)
 
     useEffect(() => {
-      if(sessionStorage.getItem("userdata")!== null){
-        // console.log();e
-        setname(JSON.parse(sessionStorage.getItem("userdata")).name)
-      }
+        if (sessionStorage.getItem("userdata") !== null) {
+            // console.log();e
+            setname(JSON.parse(sessionStorage.getItem("userdata")).name)
+            setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
+            setuserid(JSON.parse(sessionStorage.getItem("userdata")).userid)
+            axios.get("http://localhost:9999/numOfPro", {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'userid': userid,
+                    'authToken': authtoken
+                }
+            }).then((res) => {
+                console.log(res);
+                setCart(false)
+                if (res.data.status == 200) {
+                    setCartnum(res.data.data)
+                } else {
+                    setCartnum(0)
+                }
+            })
+        } else {
+            setCart(true)
+        }
     })
-    
+
     // if (!datafill) {
     //     if (sessionStorage.getItem("userdata") != null) {
     //         setauthtoken(JSON.parse(sessionStorage.getItem("userdata")).authtoken)
@@ -149,11 +169,15 @@ export const NavigationBar = (props) => {
                                     </Link>
                                 </li> */}
                                 <li class="ms-4 d-inline-block position-relative dropdown-cart">
+
                                     <Button
+                                        disabled={cart}
                                     >
-                                        <Badge badgeContent={4} color="primary">
-                                            <ShoppingCart color="action" />
-                                        </Badge>
+                                        <Link to="/cart">
+                                            <Badge badgeContent={cartnum} color="primary">
+                                                <ShoppingCart color="action" />
+                                            </Badge>
+                                        </Link>
                                     </Button>
                                 </li>
                                 {
