@@ -33,11 +33,12 @@ export const NavigationBar = (props) => {
                     'authToken': authtoken
                 }
             }).then((res) => {
-                console.log(res);
-                setCart(false)
+                console.log("this is navigation response : ",res);
                 if (res.data.status == 200) {
+                    setCart(false)
                     setCartnum(res.data.data)
                 } else {
+                    setCart(true)
                     setCartnum(0)
                 }
             })
