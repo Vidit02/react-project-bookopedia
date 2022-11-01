@@ -1,11 +1,11 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import { AllCss } from '../components/AllCss'
 
-export const CheckoutShipping = () => {
+export const CheckoutShipping = (props) => {
     const [products, setproducts] = useState([])
     const [prodata, setProdata] = useState()
     const [isLoading, setisLoading] = useState(true)
@@ -15,6 +15,8 @@ export const CheckoutShipping = () => {
     const [userid, setuserid] = useState(null)
     const [price, setPrice] = useState(0)
     const navigate = useNavigate()
+
+    
 
     useEffect(() => {
         if (sessionStorage.getItem("userdata") !== null && isLoading == true) {
@@ -50,6 +52,15 @@ export const CheckoutShipping = () => {
         }
     })
 
+    const placeOrder = async () => {
+        console.log("userid is",userid);
+        console.log(authtoken , "Authtoken is");
+        await axios.post("http://localhost:9999/placeorder/"+userid+"/"+authtoken).then((res) => {
+            console.log(res);
+            props.viewToast("success","Order is placed")
+            navigate("/index")
+        })
+    }
     return (
         <div>
             <AllCss />
@@ -160,13 +171,10 @@ export const CheckoutShipping = () => {
                                         >
                                             Back to information
                                         </Link>
-                                        <Link
-                                            to="/checkoutpayment"
-                                            className="btn btn-dark w-100 w-md-auto"
-                                            role="button"
-                                        >
-                                            Proceed to place Order
-                                        </Link>
+                                        {/* className="btn btn-dark w-100 w-md-auto" */}
+                                        <Button className='btn btn-dark w-100 w-md-auto' onClick={()=>placeOrder()}>
+                                            Proceed to Order
+                                        </Button>
                                     </div>
                                 </div>
                             </div>

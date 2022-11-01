@@ -61,7 +61,7 @@ function App() {
           <Route path='/product' element={<Product/>}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
           <Route path='/checkout' element={<Checkout/>}></Route>
-          <Route path='/checkoutshipping' element={<CheckoutShipping/>}></Route>
+          <Route path='/checkoutshipping' element={<CheckoutShipping viewToast={viewToast}/>}></Route>
           <Route path='/checkoutpayment' element={<CheckoutPayment/>}></Route>
           <Route path='/' element={<HomePage />}></Route>
           <Route path='/dashboard' element={<Dashboard/>}></Route>
